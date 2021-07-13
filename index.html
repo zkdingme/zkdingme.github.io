@@ -71,6 +71,249 @@
     
     
     
+    <article id="post-android-uid" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/07/11/android-uid/"
+    >android uid介绍</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/11/android-uid/" class="article-date">
+  <time datetime="2021-07-11T09:46:40.000Z" itemprop="datePublished">2021-07-11</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/android/">android</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="uid-是什么"><a href="#uid-是什么" class="headerlink" title="uid 是什么"></a>uid 是什么</h2><p>android中uid用于标识一个应用程序，uid在应用安装时被分配，并且在应用存在于手机上期间，都不会改变。一个应用程序只能有一个uid，多个应用可以使用sharedUserId 方式共享同一个uid，前提是这些应用的签名要相同。</p>
+<h2 id="uid-怎么生成的"><a href="#uid-怎么生成的" class="headerlink" title="uid 怎么生成的"></a>uid 怎么生成的</h2><p>uid是在app安装的时候分配的，关键代码如下：</p>
+<p><strong>以下代码来自android-10.0.0_r1</strong></p>
+<p>首先是在<a href="https://cs.android.com/android/platform/superproject/+/android-10.0.0_r1:frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java" target="_blank" rel="noopener">PMS</a>中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Prepares the system to commit a &#123;<span class="doctag">@link</span> ScanResult&#125; in a way that will not fail by registering</span></span><br><span class="line"><span class="comment"> * the app ID required for reconcile.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; if a new app ID was registered and will need to be cleaned up on</span></span><br><span class="line"><span class="comment"> *         failure.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">optimisticallyRegisterAppId</span><span class="params">(@NonNull ScanResult result)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> PackageManagerException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!result.existingSettingCopied) &#123;</span><br><span class="line">        <span class="comment">// THROWS: when we can't allocate a user id. add call to check if there's</span></span><br><span class="line">        <span class="comment">// enough space to ensure we won't throw; otherwise, don't modify state</span></span><br><span class="line">        <span class="comment">// 这里注册新的app id，也就是uid</span></span><br><span class="line">        <span class="keyword">return</span> mSettings.registerAppIdLPw(result.pkgSetting);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在<a href="https://cs.android.com/android/platform/superproject/+/android-10.0.0_r1:frameworks/base/services/core/java/com/android/server/pm/Settings.java" target="_blank" rel="noopener">Settings</a>中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Registers a user ID with the system. Potentially allocates a new user ID.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; if a new app ID was created in the process. &#123;<span class="doctag">@code</span> false&#125; can be</span></span><br><span class="line"><span class="comment"> *         returned in the case that a shared user ID already exists or the explicit app ID is</span></span><br><span class="line"><span class="comment"> *         already registered.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> PackageManagerException If a user ID could not be allocated.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">registerAppIdLPw</span><span class="params">(PackageSetting p)</span> <span class="keyword">throws</span> PackageManagerException </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">boolean</span> createdNew;</span><br><span class="line">    <span class="keyword">if</span> (p.appId == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// Assign new user ID</span></span><br><span class="line">        <span class="comment">// 这里注册新uid</span></span><br><span class="line">        p.appId = acquireAndRegisterNewAppIdLPw(p);</span><br><span class="line">        createdNew = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Add new setting to list of user IDs</span></span><br><span class="line">        createdNew = registerExistingAppIdLPw(p.appId, p, p.name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (p.appId &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        PackageManagerService.reportSettingsProblem(Log.WARN,</span><br><span class="line">                <span class="string">"Package "</span> + p.name + <span class="string">" could not be assigned a valid UID"</span>);</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> PackageManagerException(INSTALL_FAILED_INSUFFICIENT_STORAGE,</span><br><span class="line">                <span class="string">"Package "</span> + p.name + <span class="string">" could not be assigned a valid UID"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> createdNew;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Returns a new AppID or -1 if we could not find an available AppID to assign */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">acquireAndRegisterNewAppIdLPw</span><span class="params">(SettingBase obj)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Let's be stupidly inefficient for now...</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> size = mAppIds.size();</span><br><span class="line">    <span class="comment">// mFirstAvailableUid下面我会详细解释，这里可以简单理解为最近被卸载的app的uid</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = mFirstAvailableUid; i &lt; size; i++) &#123;</span><br><span class="line">        <span class="comment">// 首先看已经分配过的uid中有没有被释放的</span></span><br><span class="line">        <span class="comment">// 找到第一个可用的uid，返回</span></span><br><span class="line">        <span class="keyword">if</span> (mAppIds.get(i) == <span class="keyword">null</span>) &#123;</span><br><span class="line">            mAppIds.set(i, obj);</span><br><span class="line">            <span class="comment">// 这里 FIRST_APPLICATION_UID = 10000;</span></span><br><span class="line">            <span class="keyword">return</span> Process.FIRST_APPLICATION_UID + i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// None left?</span></span><br><span class="line">    <span class="comment">// 这里LAST_APPLICATION_UID = 19999</span></span><br><span class="line">    <span class="comment">// 所以最多安装9999个app</span></span><br><span class="line">    <span class="keyword">if</span> (size &gt; (Process.LAST_APPLICATION_UID - Process.FIRST_APPLICATION_UID)) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 已经分配的uid中没有被释放的，新分配一个</span></span><br><span class="line">    mAppIds.add(obj);</span><br><span class="line">    <span class="keyword">return</span> Process.FIRST_APPLICATION_UID + size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们解释一下mFirstAvailableUid，Settings中相关代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每次重启时会重新赋值为0</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> mFirstAvailableUid = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// This should be called (at least) whenever an application is removed</span></span><br><span class="line"><span class="comment">// 每次卸载时会被调用</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setFirstAvailableUid</span><span class="params">(<span class="keyword">int</span> uid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (uid &gt; mFirstAvailableUid) &#123;</span><br><span class="line">        mFirstAvailableUid = uid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到mFirstAvailableUid，初始化是0，之后每次有app卸载，对应uid被释放，mFirstAvailableUid就会被赋值为Math.max(mFirstAvailableUid, uid)。所以可以看到上面的循环从mFirstAvailableUid开始是做的一个小优化，希望循环次数少一点。但是也有缺陷，因为在不重启的情况下，mFirstAvailableUid一直是自增的，即使之前有被释放的uid，也访问不到，所以最坏情况就是每次都找不到可复用的uid，每次都分配新的uid，最终uid &gt; 19999，炸了，就不能安装app了。</p>
+<h2 id="怎么获取uid"><a href="#怎么获取uid" class="headerlink" title="怎么获取uid"></a>怎么获取uid</h2><ul>
+<li>ApplicationInfo.uid</li>
+<li>Process.myuid() </li>
+</ul>
+<h2 id="uid-用来做什么"><a href="#uid-用来做什么" class="headerlink" title="uid 用来做什么"></a>uid 用来做什么</h2><p>权限控制，这里有空详细写一下</p>
+<p>参考：<a href="https://www.jianshu.com/p/b33dd49f2ae6" target="_blank" rel="noopener">https://www.jianshu.com/p/b33dd49f2ae6</a></p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2021/07/11/android-uid/" data-id="ckr1nqe5q0019rkj53c9r5m5e"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/did/" rel="tag">did</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-TEE-kiss" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/07/11/TEE-kiss/"
+    >Android TEE 介绍与使用</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/11/TEE-kiss/" class="article-date">
+  <time datetime="2021-07-11T09:18:30.000Z" itemprop="datePublished">2021-07-11</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="TEE-是什么"><a href="#TEE-是什么" class="headerlink" title="TEE 是什么"></a>TEE 是什么</h2><h2 id="为什么需要TEE"><a href="#为什么需要TEE" class="headerlink" title="为什么需要TEE"></a>为什么需要TEE</h2><h2 id="怎么使用TEE"><a href="#怎么使用TEE" class="headerlink" title="怎么使用TEE"></a>怎么使用TEE</h2><h2 id="TEE-有什么特性"><a href="#TEE-有什么特性" class="headerlink" title="TEE 有什么特性"></a>TEE 有什么特性</h2>
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2021/07/11/TEE-kiss/" data-id="ckr1nqe5k000trkj5csk1fu85"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TEE/" rel="tag">TEE</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-android-file-format" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/07/07/android-file-format/"
+    >简述Android文件格式</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/07/android-file-format/" class="article-date">
+  <time datetime="2021-07-07T13:23:53.000Z" itemprop="datePublished">2021-07-07</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>APK, Bundle, DEX, ART, OAT, VDEX, jar, .etc 都是啥格式？</p>
+<p>android 加载的类从哪里来的</p>
+<p>lineage os的framework层为啥都是空的</p>
+<h2 id="APK"><a href="#APK" class="headerlink" title="APK"></a>APK</h2><p>Android 安装包，其实是个压缩文件，把后缀.apk 改成 .zip后解压，目录如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">AndroidManifest.xml </span><br><span class="line">META-INF &#x2F;&#x2F; android签名文件</span><br><span class="line">assets &#x2F;&#x2F; 资源文件</span><br><span class="line">classes.dex &#x2F;&#x2F; java代码</span><br><span class="line">classes1.dex &#x2F;&#x2F; java 代码</span><br><span class="line">classes2.dex &#x2F;&#x2F; java 代码</span><br><span class="line">lib &#x2F;&#x2F; native层so文件</span><br><span class="line">res &#x2F;&#x2F; view相关资源文件</span><br><span class="line">resources.arsc &#x2F;&#x2F; 资源索引文件，由R.layout.main 具体定位到main的路径</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h2><p>Google提出的一种将App上传到Google Play的格式，与APK类似，是一个带有 .aab 扩展名的 zip 文件。对于不使用Google Play做应用分发的开发者来说，并不需要关注这个格式。</p>
+<p><strong>Bundle与APK的关系？</strong></p>
+<p>Bundle只是上传到Google Play的格式，用户下载的还是APK。由Bundle到APK的这一步由Google Play完成。</p>
+<p><strong>为什么提出Bundle格式，有什么好处？</strong></p>
+<p>最大的好处是降低apk文件的大小。例如开发者为了兼容碎片化的android设备，会在apk里面加入很多冗余的代码或文件。例如libxxx.so， 通常一个apk中就花包含armeabi, arm64和x86等多种格式，但对具体用户来说，他只会使用一个，其他的都用不上，这些冗余的so文件就会增大apk的体积。</p>
+<p>Bundle包含了编译后的源码和资源文件，上传到Google Play之后，用户下载时，Google Play会根据用户设备类型打包bundle文件中对应的资源和代码成apk，下发给用户，可以降低包体积，也可以让开发者做出更多定制化的功能。</p>
+<p><a href="https://conorlee.top/2019/03/27/Android-APP-Bundles-Introduction/" target="_blank" rel="noopener">这篇文篇</a>介绍Bundle很清楚。</p>
+<h2 id="CLASS"><a href="#CLASS" class="headerlink" title="CLASS"></a>CLASS</h2><p>CLASS是JAVA文件被编译后的格式，也是JVM执行的的文件格式。CLASS是个二进制文件。</p>
+<p><img src="/Users/dingzhenkai/Documents/JSProj/blog/source/_posts/android-file-format/class.png" alt=""></p>
+<p>mac上可以用xxd -b xxx.class查看class文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">zkding:ttt dingzhenkai$ xxd -b LJ29.class </span><br><span class="line">00000000: 11001010 11111110 10111010 10111110 00000000 00000000  ......</span><br><span class="line">00000006: 00000000 00111000 00000000 00011110 00001010 00000000  .8....</span><br><span class="line">0000000c: 00000101 00000000 00010001 00001001 00000000 00010010  ......</span><br><span class="line">00000012: 00000000 00010011 00001010 00000000 00010100 00000000  ......</span><br><span class="line">00000018: 00010101 00000111 00000000 00010110 00000111 00000000  ......</span><br><span class="line">0000001e: 00010111 00000001 00000000 00000110 00111100 01101001  ....&lt;i</span><br><span class="line">00000024: 01101110 01101001 01110100 00111110 00000001 00000000  nit&gt;..</span><br><span class="line">0000002a: 00000011 00101000 00101001 01010110 00000001 00000000  .()V..</span><br><span class="line">00000030: 00000100 01000011 01101111 01100100 01100101 00000001  .Code.</span><br><span class="line">00000036: 00000000 00001111 01001100 01101001 01101110 01100101  ..Line</span><br><span class="line">0000003c: 01001110 01110101 01101101 01100010 01100101 01110010  Number</span><br><span class="line">00000042: 01010100 01100001 01100010 01101100 01100101 00000001  Table.</span><br><span class="line">00000048: 00000000 00001011 01110011 01110000 01101001 01110010  ..spir</span><br><span class="line">0000004e: 01100001 01101100 01001111 01110010 01100100 01100101  alOrde</span><br><span class="line">00000054: 01110010 00000001 00000000 00000111 00101000 01011011  r...([</span><br><span class="line">0000005a: 01011011 01001001 00101001 01011011 01001001 00000001  [I)[I.</span><br><span class="line">00000060: 00000000 00001101 01010011 01110100 01100001 01100011  ..Stac</span><br><span class="line">00000066: 01101011 01001101 01100001 01110000 01010100 01100001  kMapTa</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="JAR"><a href="#JAR" class="headerlink" title="JAR"></a>JAR</h2><h2 id="DEX"><a href="#DEX" class="headerlink" title="DEX"></a>DEX</h2>
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2021/07/07/android-file-format/" data-id="ckr1nqe5p0016rkj5e4sd3s1k"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" rel="tag">文件格式</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-lineageos-build" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -140,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/06/lineageos-build/" data-id="ckqtek4f8001ib3j5fsu2bt80"
+      <a data-url="https://zkdingme.github.io/2021/07/06/lineageos-build/" data-id="ckr1nqe5w001vrkj51dkr5297"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lineages/" rel="tag">lineages</a></li></ul>
@@ -221,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/06/29/nexus-flush-rom/" data-id="ckqtek4f9001ob3j581u16uyd"
+      <a data-url="https://zkdingme.github.io/2021/06/29/nexus-flush-rom/" data-id="ckr1nqe610029rkj59sopfgm3"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E6%9C%BA/" rel="tag">刷机</a></li></ul>
@@ -308,7 +551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/06/28/Android-JS-Debug/" data-id="ckqtek4e10002b3j52hut8s56"
+      <a data-url="https://zkdingme.github.io/2021/06/28/Android-JS-Debug/" data-id="ckr1nqe4p0000rkj55swb5va8"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/" rel="tag">WebView</a></li></ul>
@@ -384,7 +627,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/06/15/vpn-proxy/" data-id="ckqtek4ff0029b3j5b49w3irl"
+      <a data-url="https://zkdingme.github.io/2021/06/15/vpn-proxy/" data-id="ckr1nqe65002prkj52cto1gd7"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li></ul>
@@ -460,7 +703,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/05/18/ssh-login-expect/" data-id="ckqtek4fd0020b3j50khj8vky"
+      <a data-url="https://zkdingme.github.io/2021/05/18/ssh-login-expect/" data-id="ckr1nqe63002grkj55trj3b39"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh%E7%99%BB%E9%99%86%E8%84%9A%E6%9C%AC/" rel="tag">ssh登陆脚本</a></li></ul>
@@ -549,7 +792,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/04/20/linux-vim-kiss/" data-id="ckqtek4fe0023b3j53xoyamgs"
+      <a data-url="https://zkdingme.github.io/2021/04/20/linux-vim-kiss/" data-id="ckr1nqe5z0023rkj5haui0l66"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
@@ -623,296 +866,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/04/20/linux-crontab-kiss/" data-id="ckqtek4fb001sb3j5832u7try"
+      <a data-url="https://zkdingme.github.io/2021/04/20/linux-crontab-kiss/" data-id="ckr1nqe600027rkj504hp76f7"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crontab/" rel="tag">crontab</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-sec-sense-arch" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/03/29/sec-sense-arch/"
-    >浅谈移动设备风险感知系统架构</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/03/29/sec-sense-arch/" class="article-date">
-  <time datetime="2021-03-29T07:51:19.000Z" itemprop="datePublished">2021-03-29</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%BE%E5%A4%87%E9%A3%8E%E6%8E%A7/">设备风控</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/03/29/sec-sense-arch/" data-id="ckqtek4fc001xb3j52ovq6mm3"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E5%A4%87%E9%A3%8E%E6%8E%A7/" rel="tag">设备风控</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-alibaba-code-style" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/03/03/alibaba-code-style/"
-    >转载阿里巴巴Java开发手册</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/03/03/alibaba-code-style/" class="article-date">
-  <time datetime="2021-03-03T07:09:16.000Z" itemprop="datePublished">2021-03-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p>这是转载的阿里Java开发手册。</p>
-<h2 id="值得注意的"><a href="#值得注意的" class="headerlink" title="值得注意的"></a>值得注意的</h2><h3 id="Integer之前的比较要用equal，而不是"><a href="#Integer之前的比较要用equal，而不是" class="headerlink" title="Integer之前的比较要用equal，而不是=="></a>Integer之前的比较要用equal，而不是==</h3><p>对基础数据类型byte,short,char,int,long,float,double,boolean， == 比较的是value</p>
-<p>对非基础类型 == 比较的是指针，也就是内存地址</p>
-<p>equal比较的是指针，但是Integer这个类重写了equal方法，所以比较的就是value</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="number">111111</span>;</span><br><span class="line">Integer b = <span class="number">111111</span>;</span><br><span class="line">a == b; <span class="comment">// false</span></span><br><span class="line">a.equal(b); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="浮点数之间的等值判断，基本数据类型不能用-来比较，包装数据类型不能用-equals-来判断"><a href="#浮点数之间的等值判断，基本数据类型不能用-来比较，包装数据类型不能用-equals-来判断" class="headerlink" title="浮点数之间的等值判断，基本数据类型不能用==来比较，包装数据类型不能用 equals 来判断"></a>浮点数之间的等值判断，基本数据类型不能用==来比较，包装数据类型不能用 equals 来判断</h3><p>核心原因在于二进制无法精确表示浮点数，总是有误差，自然不能equal</p>
-<h3 id="字符串修改用StringBuilder"><a href="#字符串修改用StringBuilder" class="headerlink" title="字符串修改用StringBuilder"></a>字符串修改用StringBuilder</h3><p>直接 String a = ‘this is head ‘+ ‘this is tail’; 编译成字节码的时候是会new StringBuilder 然后 append ‘this is head’ 和 ‘this is tail’</p>
-<h3 id="Object-clone-是对象浅拷贝"><a href="#Object-clone-是对象浅拷贝" class="headerlink" title="Object.clone() 是对象浅拷贝"></a>Object.clone() 是对象浅拷贝</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name; <span class="comment">// 名字</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> School school; <span class="comment">// 毕业院校，这是是一个之前school对象的引用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>浅拷贝：</strong></p>
-<p>对象浅拷贝会new 一个新的对象，复制原对象的属性，原对象引用类型的属性只会复制引用，不会复制被引用的对象。例如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Teacher alice = <span class="keyword">new</span> Teacher();</span><br><span class="line">alice.setName(<span class="string">'alice'</span>);</span><br><span class="line">alice.setSchool(<span class="keyword">new</span> School(<span class="string">'THU'</span>));</span><br><span class="line"><span class="comment">// alice2 是复制的alice，所以name和school都一样，注意school对象是个对象，但这里只是个指针，对象浅拷贝也只是复制了这个指针，相当于给school对象加了个引用</span></span><br><span class="line">Teacher alice2 = (Teacher)alice.clone();</span><br><span class="line">alice2.getName() == <span class="string">'alice'</span>; <span class="comment">// true</span></span><br><span class="line">alice2.getSchool().getName() == <span class="string">'THU'</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p><strong>深拷贝：</strong></p>
-<p>深拷贝会将引用类型指向的对象也复制一遍。例如上面的alice对象深拷贝的话，就会在堆上再new 一个school对象，然后将指针填到alice2里面。</p>
-<embed src="ali_java.pdf" width="100%" height="960">
-
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/03/03/alibaba-code-style/" data-id="ckqtek4ez000xb3j5399n8oxz"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Code-Style/" rel="tag">Code Style</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Java-Keyword" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/02/24/Java-Keyword/"
-    >Java关键字</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/02/24/Java-Keyword/" class="article-date">
-  <time datetime="2021-02-24T03:26:57.000Z" itemprop="datePublished">2021-02-24</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p>Java中有52个保留的关键字例如final、static、synchronized等，这里重点记录几个我目前不熟悉的关键字，其他keyword的适用场景和作用可以去<a href="https://en.wikipedia.org/wiki/List_of_Java_keywords" target="_blank" rel="noopener">Wikipedia</a>上看。</p>
-<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><blockquote>
-<p>Used in field declarations to guarantee visibility of changes to variables across threads. Every read of a volatile variable will be read from main memory, and not from the CPU cache, and that every write to a volatile variable will be written to main memory, and not just to the CPU cache.<a href="https://en.wikipedia.org/wiki/List_of_Java_keywords#cite_note-Java_Volatile_Keyword-21" target="_blank" rel="noopener">[21]</a> Methods, classes and interfaces thus cannot be declared <em>volatile</em>, nor can local variables or parameters.</p>
-</blockquote>
-<p>适用场景：只能用来申明变量，不能用来申明类和函数</p>
-<p>作用：对变量的write和read操作都是直接读写main memory，而不是cpu cache。这样每个线程读写的都是最新的值。不申明volatile的话，多线程环境下，可能线程A修改了变量的值，但是只更新在cpu cache里面，并没有更新到memory里面，这样线程B读的就是老的值，而不是最新值。<br><img src="http://tutorials.jenkov.com/images/java-concurrency/java-volatile-1.png" alt=""></p>
-<p>代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SharedObject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看出，申明了volatile，就write through(既更新cache也更新memory)，不申明的话就是write back模式(只更新cache，然后等cache满了再写回到memory)</p>
-<h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><blockquote>
-<p>Used in the declaration of a method or code block to acquire the <a href="https://en.wikipedia.org/wiki/Mutex" target="_blank" rel="noopener">mutex</a> lock for an object while the current <a href="https://en.wikipedia.org/wiki/Thread_(computer_science)" target="_blank" rel="noopener">thread</a> executes the code.<a href="https://en.wikipedia.org/wiki/List_of_Java_keywords#cite_note-FOOTNOTEFlanagan200566-67-8" target="_blank" rel="noopener">[8]</a> For static methods, the object locked is the class’s <code>Class</code>. Guarantees that at most one thread at a time operating on the same object executes that code. The mutex lock is automatically released when execution exits the synchronized code. Fields, classes and interfaces cannot be declared as <em>synchronized</em>.</p>
-</blockquote>
-<p>适用场景：只适用于method 和code block，不能用于申明field,class和interfence</p>
-<p>作用：用加锁的方式确保同步执行一段代码</p>
-<p>代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCounter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.count += value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> MyStaticCounter&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">      count += value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">     <span class="keyword">this</span>.count += value;   </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="super"><a href="#super" class="headerlink" title="super"></a>super</h2><blockquote>
-<p>Inheritance basically used to achieve dynamic binding or run-time polymorphism in java. Used to access members of a class inherited by the class in which it appears. Allows a subclass to access <a href="https://en.wikipedia.org/wiki/Method_overriding_(programming)" target="_blank" rel="noopener">overridden</a> methods and hidden members of its superclass. The <code>super</code> keyword is also used to forward a call from a constructor to a constructor in the superclass.</p>
-<p>Also used to specify a lower bound on a type parameter in Generics.</p>
-</blockquote>
-<p>适用场景：用在子类的函数中</p>
-<p>作用：调用父类的同名变量，函数(包括构造函数)</p>
-<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><blockquote>
-<p>Used to represent an instance of the class in which it appears. <code>this</code> can be used to access class members and as a reference to the current instance. The <code>this</code> keyword is also used to forward a call from one constructor in a class to another constructor in the same class.</p>
-</blockquote>
-<p>适用场景：在类中使用</p>
-<p>作用：表示当前类的实例</p>
-<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><blockquote>
-<p>Define an entity once that cannot be changed nor derived from later. More specifically: a final class cannot be subclassed, a final method cannot be overridden, and a final variable can occur at most once as a left-hand expression on an executed command. All methods in a final class are implicitly <code>final</code>.</p>
-</blockquote>
-<p>适用场景：申明变量、函数、类</p>
-<p>作用：申明的对象不可以被修改。申明变量，变量变为常量；申明函数，函数不可以被override；申明类，不可以有子类</p>
-<h2 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h2><blockquote>
-<p>Used to define a block of statements for a block defined previously by the <code>try</code> keyword. The <code>finally</code> block is executed after execution exits the <code>try</code> block and any associated <code>catch</code> clauses regardless of whether an exception was thrown or caught, or execution left method in the middle of the <code>try</code> or <code>catch</code> blocks using the <code>return</code> keyword.</p>
-</blockquote>
-<p>适用场景：在try/catch 语句之后</p>
-<p>作用：在程序进入try块之后，无论程序是因为异常而中止或其它方式返回终止的，finally块的内容一定会被执行 。</p>
-<p>代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo2</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">new</span> ExceptionDemo2().doTheWork();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTheWork</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      Object o = <span class="keyword">null</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</span><br><span class="line">         <span class="keyword">try</span> &#123;</span><br><span class="line">            o = makeObj(i);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">            System.err.println</span><br><span class="line">            (<span class="string">"Error: ("</span>+ e.getMessage()+<span class="string">")."</span>);</span><br><span class="line">            <span class="keyword">return</span>;   </span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.err.println(<span class="string">"都已执行完毕"</span>);</span><br><span class="line">            <span class="keyword">if</span> (o==<span class="keyword">null</span>)</span><br><span class="line">            System.exit(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(o); </span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">makeObj</span><span class="params">(<span class="keyword">int</span> type)</span> </span></span><br><span class="line"><span class="function">   <span class="keyword">throws</span> IllegalArgumentException </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (type == <span class="number">1</span>)  </span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException</span><br><span class="line">      (<span class="string">"不是指定的类型： "</span> + type);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Object();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="private-protect-public"><a href="#private-protect-public" class="headerlink" title="private, protect, public"></a>private, protect, public</h2><blockquote>
-<p>The <code>private</code> keyword is used in the declaration of a method, field, or inner class; private members can only be accessed by other members of their own class.</p>
-<p>The <code>protected</code> keyword is used in the declaration of a method, field, or inner class; protected members can only be accessed by members of their own class, that class’s <a href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)" target="_blank" rel="noopener">subclasses</a> or classes from the same <a href="https://en.wikipedia.org/wiki/Java_package" target="_blank" rel="noopener">package</a>.</p>
-<p>The <code>public</code> keyword is used in the declaration of a class, method, or field; public classes, methods, and fields can be accessed by the members of any class.</p>
-</blockquote>
-<p>适用场景：申明变量、函数和类</p>
-<p>作用：区别在于访问权限。private申明的只能在当前类里面访问；public申明的只能在当前类、当前类的子类和当前类所在包的类访问；public申明的可以随意访问，没有access限制。</p>
-<h2 id="strictfp"><a href="#strictfp" class="headerlink" title="strictfp"></a>strictfp</h2><blockquote>
-<p>A Java keyword used to restrict the precision and rounding of floating point calculations to ensure portability.281</p>
-<p>Strictfp ensures that you get exactly the same results from your floating point calculations on every platform. If you don’t use strictfp, the JVM implementation is free to use extra precision where available.</p>
-</blockquote>
-<p>适用场景：申明浮点数</p>
-<p>作用：普通float申明的变量同样的计算在不同的平台可能有不同的结果。用strictfp申明的浮点数在不同平台计算时就会有相同的结果。</p>
-<h2 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h2><blockquote>
-<p>Declares that an instance field is not part of the default <a href="https://en.wikipedia.org/wiki/Serialization" target="_blank" rel="noopener">serialized</a> form of an object. When an object is serialized, only the values of its non-transient instance fields are included in the default serial representation. When an object is deserialized, transient fields are initialized only to their default value. If the default form is not used, e.g. when a <em>serialPersistentFields</em> table is declared in the class hierarchy, all <code>transient</code> keywords are ignored.[<a href="https://en.wikipedia.org/wiki/List_of_Java_keywords#cite_note-serialSpec-19" target="_blank" rel="noopener"></a></p>
-</blockquote>
-<p>适用场景：类中申明类的属性，序列化时这些属性不会被序列化</p>
-<p>作用：类的有些属性需要序列化，而其他属性不需要被序列化，打个比方，如果一个用户有一些敏感信息（如密码，银行卡号等），为了安全起见，不希望在网络操作（主要涉及到序列化操作，本地序列化缓存也适用）中被传输，这些信息对应的变量就可以加上transient关键字。换句话说，这个字段的生命周期仅存于调用者的内存中而不会写到磁盘里持久化。</p>
-<p>代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">8294180014912103005L</span>;  </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> String passwd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>参考： <a href="https://www.cnblogs.com/lanxuezaipiao/p/3369962.html" target="_blank" rel="noopener">https://www.cnblogs.com/lanxuezaipiao/p/3369962.html</a></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>代码示例来自 <a href="http://tutorials.jenkov.com/" target="_blank" rel="noopener">java tutorials</a> 和 <a href="https://www.runoob.com/java/java-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a></p>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/02/24/Java-Keyword/" data-id="ckqtek4ec000bb3j5b8egewqn"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%B3%E9%94%AE%E5%AD%97/" rel="tag">关键字</a></li></ul>
 
     </footer>
 
@@ -934,7 +891,7 @@
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>
