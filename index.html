@@ -71,6 +71,157 @@
     
     
     
+    <article id="post-elf-format" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/07/14/elf-format/"
+    >elf 格式简介</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/14/elf-format/" class="article-date">
+  <time datetime="2021-07-14T11:23:49.000Z" itemprop="datePublished">2021-07-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="1-elf是什么"><a href="#1-elf是什么" class="headerlink" title="1. elf是什么"></a>1. elf是什么</h2><p>维基百科介绍如下：</p>
+<blockquote>
+<p><strong>可执行与可链接格式</strong> （英语：Executable and Linkable Format，缩写为ELF），常被称为<strong>ELF格式</strong>，在<a href="https://zh.wikipedia.org/wiki/電腦科學" target="_blank" rel="noopener">计算机科学</a>中，是一种用于<a href="https://zh.wikipedia.org/wiki/執行檔" target="_blank" rel="noopener">可执行文件</a>、<a href="https://zh.wikipedia.org/wiki/目的檔" target="_blank" rel="noopener">目标文件</a>、<a href="https://zh.wikipedia.org/wiki/共享库" target="_blank" rel="noopener">共享库</a>和核心转储(core dump)的标准<a href="https://zh.wikipedia.org/wiki/檔案格式" target="_blank" rel="noopener">文件格式</a>。</p>
+</blockquote>
+<p>Linux 中</p>
+<p>例如Linux中可执行文件ls, grep之类的，或者共享库libc.so 都是elf格式。</p>
+<h2 id="2-elf文件格式是什么样的，有图吗"><a href="#2-elf文件格式是什么样的，有图吗" class="headerlink" title="2. elf文件格式是什么样的，有图吗"></a>2. elf文件格式是什么样的，有图吗</h2><p><img src="/Users/dingzhenkai/Documents/JSProj/blog/source/_posts/elf-format/elf-format.png" alt=""></p>
+<ul>
+<li><p>ELF header：在文件的开始，描述整个文件的组织。</p>
+</li>
+<li><p>Program header table：告诉系统如何创建进程映像。用来构造进程映像的目标文件必须具有程序头部表，可重定位文件不需要这个表。</p>
+</li>
+<li><p>Section header table ：包含了描述文件节区的信息，每个节区在表中都有一项，每一项给出诸如节区名称、节区大小这类信息。用于链接的目标文件必须包含节区头部表，其他目标文件可以有，也可以没有这个表。</p>
+</li>
+<li><p>sections 或者 segments：segments是从运行的角度来描述elf文件，sections是从链接的角度来描述elf文件，也就是说，在链接阶段，我们可以忽略program header table来处理此文件，在运行阶段可以忽略section header table来处理此程序（所以很多加固手段删除了section header table）。注意：segments与sections是包含的关系，一个segment包含若干个section。</p>
+</li>
+</ul>
+<p><strong>Section 有哪些</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.cpp </span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>; <span class="comment">// .data</span></span><br><span class="line"><span class="keyword">char</span> *p1; <span class="comment">// .bss</span></span><br><span class="line">main() </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">int</span> b; <span class="comment">// 栈</span></span><br><span class="line"><span class="keyword">char</span> s[] = <span class="string">"abc"</span>; <span class="comment">// 栈</span></span><br><span class="line"><span class="keyword">char</span> *p2; <span class="comment">// 栈</span></span><br><span class="line"><span class="keyword">char</span> *p3 = <span class="string">"123456"</span>; <span class="comment">// p3 在栈上, "123456" 在 rodata</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> c =<span class="number">0</span>； <span class="comment">// .data</span></span><br><span class="line">p1 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">10</span>); </span><br><span class="line">p2 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">20</span>); </span><br><span class="line"><span class="comment">// 分配得来得10和20字节的区域就在堆区。 </span></span><br><span class="line"><span class="built_in">strcpy</span>(p1, <span class="string">"123456"</span>); <span class="comment">// 123456放在常量区，编译器可能会将它与p3所指向的"123456"优化成一个地方。 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>.bss </p>
+<p>未初始化的全局变量和静态变量，初始化为0的全局变量和静态变量也在.bss，如果数据全是零，为了优化考虑，编译器把它当作bss处理</p>
+<p>.bss 段不占elf文件空间，其内容由操作系统初始化，统一初始化为0 .bss类型的全局变量只占运行时的内存空间，而不占文件空间</p>
+</li>
+<li><p>.comment </p>
+<p>一些版本信息</p>
+</li>
+<li><p>.data .data1 </p>
+<p>静态初始化(非零)的数据，所以有初值的全局变量和static变量在data区</p>
+</li>
+<li><p>.debug </p>
+</li>
+<li><p>.dynamic </p>
+</li>
+<li><p>.dynstr </p>
+</li>
+<li><p>.dynsym </p>
+</li>
+<li><p>.fini </p>
+</li>
+<li><p>.got </p>
+<p>外部变量引用的地址</p>
+</li>
+<li><p>.hash </p>
+</li>
+<li><p>.init </p>
+</li>
+<li><p>.interp </p>
+</li>
+<li><p>.line </p>
+</li>
+<li><p>.note </p>
+</li>
+<li><p>.plt </p>
+</li>
+<li><p>.plt.got</p>
+<p>外部函数引用的地址</p>
+<p><a href="https://gtoad.github.io/2018/07/05/Android-Native-Hook/" target="_blank" rel="noopener">https://gtoad.github.io/2018/07/05/Android-Native-Hook/</a></p>
+</li>
+<li><p>.relname</p>
+</li>
+<li><p>.relaname </p>
+</li>
+<li><p>.rodata .rodata1 </p>
+<p>存放常量</p>
+<p>用const修饰的变量放在 rodata 里，字符串默认就是常量, #define定义的常量</p>
+<p>const修饰的全局变量在常量区；const修饰的局部变量只是为了防止修改，没有放入常量区</p>
+<p><a href="https://blog.csdn.net/laiqun_ai/article/details/8528366" target="_blank" rel="noopener">https://blog.csdn.net/laiqun_ai/article/details/8528366</a></p>
+</li>
+<li><p>.shstrtab </p>
+</li>
+<li><p>.strtab </p>
+</li>
+<li><p>.symtab </p>
+</li>
+<li><p>.text</p>
+<p>代码</p>
+</li>
+</ul>
+<p>参考： <a href="https://refspecs.linuxfoundation.org/elf/elf.pdf" target="_blank" rel="noopener">https://refspecs.linuxfoundation.org/elf/elf.pdf</a></p>
+<p><a href="https://bbs.pediy.com/thread-259901.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-259901.htm</a></p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2021/07/14/elf-format/" data-id="ckrc233cf0021m0j55073aj8f"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elf/" rel="tag">elf</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-android-uid" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -138,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/11/android-uid/" data-id="ckr1nqe5q0019rkj53c9r5m5e"
+      <a data-url="https://zkdingme.github.io/2021/07/11/android-uid/" data-id="ckrc233c60019m0j58n3x2rgt"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/did/" rel="tag">did</a></li></ul>
@@ -205,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/11/TEE-kiss/" data-id="ckr1nqe5k000trkj5csk1fu85"
+      <a data-url="https://zkdingme.github.io/2021/07/11/TEE-kiss/" data-id="ckrc233c20010m0j56t3f1a6e"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TEE/" rel="tag">TEE</a></li></ul>
@@ -286,16 +437,25 @@
 <p>mac上可以用xxd -b xxx.class查看class文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">zkding:ttt dingzhenkai$ xxd -b LJ29.class </span><br><span class="line">00000000: 11001010 11111110 10111010 10111110 00000000 00000000  ......</span><br><span class="line">00000006: 00000000 00111000 00000000 00011110 00001010 00000000  .8....</span><br><span class="line">0000000c: 00000101 00000000 00010001 00001001 00000000 00010010  ......</span><br><span class="line">00000012: 00000000 00010011 00001010 00000000 00010100 00000000  ......</span><br><span class="line">00000018: 00010101 00000111 00000000 00010110 00000111 00000000  ......</span><br><span class="line">0000001e: 00010111 00000001 00000000 00000110 00111100 01101001  ....&lt;i</span><br><span class="line">00000024: 01101110 01101001 01110100 00111110 00000001 00000000  nit&gt;..</span><br><span class="line">0000002a: 00000011 00101000 00101001 01010110 00000001 00000000  .()V..</span><br><span class="line">00000030: 00000100 01000011 01101111 01100100 01100101 00000001  .Code.</span><br><span class="line">00000036: 00000000 00001111 01001100 01101001 01101110 01100101  ..Line</span><br><span class="line">0000003c: 01001110 01110101 01101101 01100010 01100101 01110010  Number</span><br><span class="line">00000042: 01010100 01100001 01100010 01101100 01100101 00000001  Table.</span><br><span class="line">00000048: 00000000 00001011 01110011 01110000 01101001 01110010  ..spir</span><br><span class="line">0000004e: 01100001 01101100 01001111 01110010 01100100 01100101  alOrde</span><br><span class="line">00000054: 01110010 00000001 00000000 00000111 00101000 01011011  r...([</span><br><span class="line">0000005a: 01011011 01001001 00101001 01011011 01001001 00000001  [I)[I.</span><br><span class="line">00000060: 00000000 00001101 01010011 01110100 01100001 01100011  ..Stac</span><br><span class="line">00000066: 01101011 01001101 01100001 01110000 01010100 01100001  kMapTa</span><br></pre></td></tr></table></figure>
 
+<h2 id="JAR"><a href="#JAR" class="headerlink" title="JAR"></a>JAR</h2><p>.class集合</p>
+<h2 id="DEX"><a href="#DEX" class="headerlink" title="DEX"></a>DEX</h2><p>.class集合</p>
+<p>在Android平台上，当java程序编译成class后，使用dx工具将所有的class文件整合到一个dex文件，目的是其中各个类能够共享数据，在一定程度上降低了冗余，同时也是文件结构更加经凑，dex文件是传统jar文件大小的50%左右。</p>
+<h2 id="VDEX"><a href="#VDEX" class="headerlink" title="VDEX"></a>VDEX</h2><p>google在android8.0新增加了vdex文件，其中包含 APK 的未压缩 DEX 代码，另外还有一些旨在加快验证速度的元数据。</p>
+<p>VDEX 文件有助于提升软件更新的性能和用户体验。VDEX 文件会存储包含验证程序依赖项且经过预验证的 DEX 文件，以便 ART 在系统更新期间无需再次解压和验证 DEX 文件。无需执行任何操作，即可实现该功能。该功能默认处于启用状态。要停用该功能，请将 ART_ENABLE_VDEX 环境变量设为 false。</p>
+<h2 id="ODEX"><a href="#ODEX" class="headerlink" title="ODEX"></a>ODEX</h2><p>全名Optimized DEX，即优化过的DEX。<br>Apk在安装(installer)时，就会进行验证和优化，目的是为了校验代码合法性及优化代码执行速度，验证和优化后，会产生ODEX文件，运行Apk的时候，直接加载ODEX，避免重复验证和优化，加快了Apk的响应时间。</p>
+<p>注意：优化过程会根据不同设备上Dalvik虚拟机的版本、Framework库的不同等因素而不同。在一台设备上被优化过的ODEX文件，拷贝到另一台设备上不一定能够运行。</p>
+<h2 id="ART"><a href="#ART" class="headerlink" title="ART"></a>ART</h2><p>.art是一些类/filed/方法，app启动直接map到内存，从odex中拆分出来的,art文件主要为了加快应用的对“热代码”的加载与缓存</p>
+<h2 id="OAT"><a href="#OAT" class="headerlink" title="OAT"></a>OAT</h2><p>oat 文件是 ART 运行的文件，是一种ELF格式的二进制可运行文件，包含 DEX 文件和编译出的本地机器指令文件。因为 oat 文件包含 DEX 文件，因此比 ODEX 文件占用空间更大。</p>
+<p>由于其在安装时打包在里面的classes.dex文件会被工具dex2oat翻译成本地机器指令，最终得到一个ELF格式的OAT文件，ART 加载 OAT 文件后不需要经过处理就可以直接运行，它没有了从字节码装换成机器码的过程，因此运行速度更快。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191021092126228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5XY2hldW5n,size_16,color_FFFFFF,t_70" alt=""></p>
+<h2 id="Android-mk-Android-bp"><a href="#Android-mk-Android-bp" class="headerlink" title="Android.mk Android.bp"></a>Android.mk Android.bp</h2><p>参考：<a href="https://blog.csdn.net/johnWcheung/article/details/102657024" target="_blank" rel="noopener">https://blog.csdn.net/johnWcheung/article/details/102657024</a></p>
 
-
-
-<h2 id="JAR"><a href="#JAR" class="headerlink" title="JAR"></a>JAR</h2><h2 id="DEX"><a href="#DEX" class="headerlink" title="DEX"></a>DEX</h2>
       
       <!-- 打赏 -->
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/07/android-file-format/" data-id="ckr1nqe5p0016rkj5e4sd3s1k"
+      <a data-url="https://zkdingme.github.io/2021/07/07/android-file-format/" data-id="ckrc233c30012m0j52m01hef4"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" rel="tag">文件格式</a></li></ul>
@@ -383,7 +543,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/06/lineageos-build/" data-id="ckr1nqe5w001vrkj51dkr5297"
+      <a data-url="https://zkdingme.github.io/2021/07/06/lineageos-build/" data-id="ckrc233cf0024m0j53d2e6o1k"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lineages/" rel="tag">lineages</a></li></ul>
@@ -464,7 +624,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/06/29/nexus-flush-rom/" data-id="ckr1nqe610029rkj59sopfgm3"
+      <a data-url="https://zkdingme.github.io/2021/06/29/nexus-flush-rom/" data-id="ckrc233ch002am0j5apfmg847"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E6%9C%BA/" rel="tag">刷机</a></li></ul>
@@ -551,7 +711,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/06/28/Android-JS-Debug/" data-id="ckr1nqe4p0000rkj55swb5va8"
+      <a data-url="https://zkdingme.github.io/2021/06/28/Android-JS-Debug/" data-id="ckrc233bm0005m0j59aum5x2j"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/" rel="tag">WebView</a></li></ul>
@@ -627,7 +787,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/06/15/vpn-proxy/" data-id="ckr1nqe65002prkj52cto1gd7"
+      <a data-url="https://zkdingme.github.io/2021/06/15/vpn-proxy/" data-id="ckrc233dg0048m0j58skg8kfe"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li></ul>
@@ -703,7 +863,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/05/18/ssh-login-expect/" data-id="ckr1nqe63002grkj55trj3b39"
+      <a data-url="https://zkdingme.github.io/2021/05/18/ssh-login-expect/" data-id="ckrc233de0043m0j5840hbeas"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh%E7%99%BB%E9%99%86%E8%84%9A%E6%9C%AC/" rel="tag">ssh登陆脚本</a></li></ul>
@@ -792,84 +952,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/04/20/linux-vim-kiss/" data-id="ckr1nqe5z0023rkj5haui0l66"
+      <a data-url="https://zkdingme.github.io/2021/04/20/linux-vim-kiss/" data-id="ckrc233cj002hm0j57g24ai61"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-linux-crontab-kiss" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/04/20/linux-crontab-kiss/"
-    >linux crontab 命令介绍</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/04/20/linux-crontab-kiss/" class="article-date">
-  <time datetime="2021-04-20T07:00:01.000Z" itemprop="datePublished">2021-04-20</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p><a href="https://www.runoob.com/linux/linux-comm-crontab.html" target="_blank" rel="noopener">菜鸟教程crontab介绍</a></p>
-<h2 id="一些注意点"><a href="#一些注意点" class="headerlink" title="一些注意点"></a>一些注意点</h2><ul>
-<li>crontab会在/home/<user> 路径下执行shell脚本，所以shell脚本中设计文件路径一定要使用绝对路径，不能使用相对路径</li>
-<li>crontab的log在/var/mail/<user> , crontab daemon会把每条crontab的任务结果记录在这里</li>
-<li>crontab 是以user身份执行脚本文件</li>
-</ul>
-<h2 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h2><p>TODO</p>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/04/20/linux-crontab-kiss/" data-id="ckr1nqe600027rkj504hp76f7"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crontab/" rel="tag">crontab</a></li></ul>
 
     </footer>
 

@@ -71,6 +71,103 @@
     
     
     
+    <article id="post-ssh-remote-tunnel" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/09/26/ssh-remote-tunnel/"
+    >ssh remote tunnel 介绍</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/09/26/ssh-remote-tunnel/" class="article-date">
+  <time datetime="2020-09-26T12:53:24.000Z" itemprop="datePublished">2020-09-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p><strong>转载自 <a href="https://blog.csdn.net/blade2001/article/details/8877250" target="_blank" rel="noopener">https://blog.csdn.net/blade2001/article/details/8877250</a></strong></p>
+<p>SSH的的Port Forward，中文可以称为端口转发，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。下面仔细就仔细讨论SSH的这种非常有用的功能。</p>
+<p>SSH Tunnel有三种，分别是本地Local（ssh -NfL），远程Remote（ssh -NfR），动态Dynamic（ssh -NfD）。（含义参考<a href="http://linux.die.net/man/1/ssh" target="_blank" rel="noopener">man ssh</a>）</p>
+<p>说明：在我们举例说明用法之前，先假设你有一台SSH机器，它的IP是a.b.c.d。</p>
+<p>1：本地Local（ssh -NfL）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L &lt;local port&gt;:&lt;remote host&gt;:&lt;remote port&gt; &lt;SSH hostname&gt;</span><br></pre></td></tr></table></figure>
+
+<p>ssh -NfL a.b.c.d : 1234 : <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> : 80  a.b.c.d</p>
+<p>此时，在浏览器里键入：<a href="http://a.b.c.d:1234" target="_blank" rel="noopener">http://a.b.c.d:1234</a> 就会看到Google的页面了。</p>
+<p>在绑定1234端口的时候，可以省略前面的ip，如此一来，1234端口就仅仅绑定在localhost地址上，更安全：</p>
+<p>ssh -NfL 1234 : <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> : 80  a.b.c.d</p>
+<p>此时浏览的话就要在a.b.c.d机器上使用<a href="http://localhost:1234" target="_blank" rel="noopener">http://localhost:1234</a> 了。</p>
+<p><strong><em>\</em>何时使用本地Tunnel？\</strong></p>
+<p>*<em>比如说你在本地访问不了某个网络服务（如<a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> ，而有一台机器（如：a.b.c.d）可以，那么你就可以通过这台机器来访问。***</em></p>
+<p>2：远程Remote（ssh -NfR）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -R &lt;local port&gt;:&lt;remote host&gt;:&lt;remote port&gt; &lt;SSH hostname&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在需要被访问的内网机器上运行： ssh -NfR 1234 : localhost : 22  a.b.c.d</p>
+<p>登录到a.b.c.d机器，使用如下命令连接内网机器：</p>
+<p>ssh -p 1234  localhost</p>
+<p>需要注意的是上下两个命令里的localhost不是同一台。这时你会发现自己已经连上最开始命令里的localhost机器了，也就是执行“ssh -NfR”的那台机器。</p>
+<p><strong><em>\</em>何时使用远程Tunnel？\</strong></p>
+<p>*<em>比如当你下班回家后就访问不了公司内网的机器了，遇到这种情况可以事先在公司内网的机器上执行远程Tunnel，连上一台公司外网的机器，等你下班回家后 就可以通过公司外网的机器去访问公司内网的机器了。***</em></p>
+<p>3：动态Dynamic（ssh -NfD）<strong>-\</strong>Socket代理****</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D</span><br></pre></td></tr></table></figure>
+
+<p>ssh -NfD 1234  a.b.c.d</p>
+<p>a.b.c.c 是server 地址</p>
+<p>如此一来就建立了一台Socket代理机器，接着在浏览器上设置Socket代理：地址是localhost，端口是1234，从此以后，你的访问都是加 密的了！你可以通过访问 <a href="http://www.whatismyip.com/" target="_blank" rel="noopener">WhatIsMyIP</a> 来 确认自己现在的IP，看看是不是已经变成a.b.c.d了。</p>
+<p>测试阶段，也可以把端口绑定在外网地址上，如此一来，你在浏览器上就可以使用外网地址设置Socket代理，但这仅限于测试，否则，你的机器就不安全了， 随时可能成为肉鸡。对于Windows用户来说，如果讨厌命令行，还可以使用MyEnTunnel来实现同样的功能，配合Firefox的 FoxyPorxy，基本就无敌了，至于具体的配置方法，小崔已经写好了： <a href="http://fendou.org/2010/01/19/firefox-foxyproxy-ssh/" target="_blank" rel="noopener">使用Firefox+foxyProxy+SSH翻山越岭</a> 。如果你使用的是Chrome的话，则可以选择 Proxy Switchy!来实现同样的效果，恕不多言。</p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2020/09/26/ssh-remote-tunnel/" data-id="ckrc233df0045m0j5dmy70oss"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh-tunnel/" rel="tag">ssh tunnel</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-batch为啥快" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -121,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/09/26/batch%E4%B8%BA%E5%95%A5%E5%BF%AB/" data-id="ckr1nqe5s001hrkj581xrdl9p"
+      <a data-url="https://zkdingme.github.io/2020/09/26/batch%E4%B8%BA%E5%95%A5%E5%BF%AB/" data-id="ckrc233c7001hm0j5e8g02s1x"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%89%B9%E5%A4%84%E7%90%86/" rel="tag">批处理</a></li></ul>
@@ -205,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/09/15/DeFi/" data-id="ckr1nqe57000arkj53jl01x17"
+      <a data-url="https://zkdingme.github.io/2020/09/15/DeFi/" data-id="ckrc233bp000bm0j548v9g2s6"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeFi/" rel="tag">DeFi</a></li></ul>
@@ -416,7 +513,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/08/18/bloom-filter-kiss/" data-id="ckr1nqe5r001erkj558soar1e"
+      <a data-url="https://zkdingme.github.io/2020/08/18/bloom-filter-kiss/" data-id="ckrc233c9001lm0j51q8l5t6s"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bloom-filter/" rel="tag">bloom filter</a></li></ul>
@@ -539,7 +636,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/08/03/ChinaJoy2020/" data-id="ckr1nqe540006rkj53i4bc6ks"
+      <a data-url="https://zkdingme.github.io/2020/08/03/ChinaJoy2020/" data-id="ckrc233br000fm0j5gt7128zf"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ChinaJoy2020/" rel="tag">ChinaJoy2020</a></li></ul>
@@ -888,7 +985,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/06/23/ADS-Notes/" data-id="ckr1nqe560009rkj55ww840xk"
+      <a data-url="https://zkdingme.github.io/2020/06/23/ADS-Notes/" data-id="ckrc233be0001m0j553rvfeaw"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ADS/" rel="tag">ADS</a></li></ul>
@@ -972,7 +1069,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/05/19/docker%E8%BF%81%E7%A7%BB-var-lib-docker/" data-id="ckr1nqe5v001rrkj51bwjffok"
+      <a data-url="https://zkdingme.github.io/2020/05/19/docker%E8%BF%81%E7%A7%BB-var-lib-docker/" data-id="ckrc233cb001qm0j54uayhk64"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB-var-lib-docker/" rel="tag">迁移/var/lib/docker</a></li></ul>
@@ -1064,7 +1161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/05/16/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%80%86%E5%90%91/" data-id="ckr1nqe6a0035rkj58c6m854i"
+      <a data-url="https://zkdingme.github.io/2020/05/16/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%80%86%E5%90%91/" data-id="ckrc233dn004tm0j5day17u00"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li></ul>
@@ -1139,7 +1236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/03/28/%E9%85%8D%E7%BD%AEbash%E4%B8%8Egit%E4%BB%A3%E7%90%86%E7%BF%BB%E5%A2%99/" data-id="ckr1nqe6c003brkj58cp74oht"
+      <a data-url="https://zkdingme.github.io/2020/03/28/%E9%85%8D%E7%BD%AEbash%E4%B8%8Egit%E4%BB%A3%E7%90%86%E7%BF%BB%E5%A2%99/" data-id="ckrc233dm004qm0j5f3o29smr"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li></ul>
@@ -1417,92 +1514,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/03/22/elasticsearch%E5%85%AC%E5%BC%80%E8%AF%BE%E9%98%AE%E4%B8%80%E9%B8%A3/" data-id="ckr1nqe5y0021rkj5f0y75kbc"
+      <a data-url="https://zkdingme.github.io/2020/03/22/elasticsearch%E5%85%AC%E5%BC%80%E8%AF%BE%E9%98%AE%E4%B8%80%E9%B8%A3/" data-id="ckrc233cd001vm0j5ctkjh3dj"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elasticsearch/" rel="tag">elasticsearch</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Cuttlefish介绍" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/03/21/Cuttlefish%E4%BB%8B%E7%BB%8D/"
-    >Android Cuttlefish介绍</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/03/21/Cuttlefish%E4%BB%8B%E7%BB%8D/" class="article-date">
-  <time datetime="2020-03-21T08:10:32.000Z" itemprop="datePublished">2020-03-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p><strong>这是个啥？它跟模拟器的区别是什么？</strong></p>
-<p>官网介绍：<a href="https://source.android.google.cn/setup/create/cuttlefish?hl=zh-cn" target="_blank" rel="noopener">https://source.android.google.cn/setup/create/cuttlefish?hl=zh-cn</a></p>
-<p>github：<a href="https://github.com/google/android-cuttlefish" target="_blank" rel="noopener">https://github.com/google/android-cuttlefish</a></p>
-<blockquote>
-<p><strong>什么是 Cuttlefish？</strong></p>
-<p>Cuttlefish 是一种可配置的虚拟 Android 设备，既可以从远程运行（使用第三方云产品，如 Google Cloud Engine），又可以在本地运行（在 Linux x86 计算机上）。</p>
-<p>Cuttlefish 与其他设备的对比情况</p>
-<p><strong>Cuttlefish 和 Android 模拟器</strong></p>
-<p>Cuttlefish 与 <a href="https://source.android.google.cn/setup/create/avd?hl=zh-cn" target="_blank" rel="noopener">Android 模拟器</a>有许多相似之处，但 Cuttlefish 可以保证 Android 框架（无论这是纯 AOSP，还是您自己的树中的自定义实现）实现全保真。在实际应用中，这意味着，您应该会发现 Cuttlefish 在操作系统级别响应您的交互，就像使用相同的自定义或纯 Android 操作系统源代码构建的实体手机目标一样。</p>
-<p>Android 模拟器围绕简化应用开发的用例构建而成，它包含许多功能钩子来迎合 Android 应用开发者的用例。如果您要使用您的自定义 Android 框架来构建模拟器，这可能会带来一些挑战。如果您需要能够代表您的自定义平台/框架代码或 Android 树形结构的虚拟设备，那么 Cuttlefish 虚拟设备是理想的选择。它是用于表示当前 AOSP 开发状态的规范设备。</p>
-<p>Cuttlefish 和物理设备</p>
-<p>Cuttlefish 虚拟设备与物理设备之间的主要区别在于硬件抽象层 (HAL) 级别，以及与任何自定义硬件交互的任何软件。除了硬件专用实现之外，您应该会发现 Cuttlefish 和物理设备表现出在功能上等效的行为。</p>
-</blockquote>
-<p><strong>cuttlefish与云手机</strong></p>
-<p>云手机现在一块是docker跑魔改后的aosp，另一块就是基于cuttlefish</p>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/03/21/Cuttlefish%E4%BB%8B%E7%BB%8D/" data-id="ckr1nqe5a000drkj50qoo9css"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cuttlefish/" rel="tag">Cuttlefish</a></li></ul>
 
     </footer>
 

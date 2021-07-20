@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    制作U盘系统盘 |  丁星乐
+    Tag: elf |  丁星乐
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -35,190 +35,55 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-制作U盘系统盘" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
+  <article class="articles">
     
-    <header class="article-header">
+    
+    <h1 class="page-type-title">#&nbspelf</h1>
+    
+    
+  
+  
+  
+  
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2021" class="archive-year">2021</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2021/07/14/elf-format/" class="archive-article-date">
+  <time datetime="2021-07-14T11:23:49.000Z" itemprop="datePublished">07/14</time>
+</a>
        
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  制作U盘系统盘
-</h1>
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2021/07/14/elf-format/"
+    >elf 格式简介</a
+  >
+</h2>
   
 
     </header>
     
+    
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elf/" rel="tag">elf</a></li></ul>
 
     
-    <div class="article-meta">
-      <a href="/2020/11/21/%E5%88%B6%E4%BD%9CU%E7%9B%98%E7%B3%BB%E7%BB%9F%E7%9B%98/" class="article-date">
-  <time datetime="2020-11-21T07:32:28.000Z" itemprop="datePublished">2020-11-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
   </div>
-
-      
-      
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">430字</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1分钟</span>
-        </span>
-    </span>
-</div>
-
-      
-    </div>
-    
-
-    
-    
-
-
-
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p>目标：制作一个ubuntu 18.04的u盘系统盘</p>
-<p>步骤如下：</p>
-<ol>
-<li><p>Windows下载安装<a href="https://rufus.akeo.ie/" target="_blank" rel="noopener">refus</a></p>
-</li>
-<li><p>去<a href="http://releases.ubuntu.com/18.04.4/" target="_blank" rel="noopener">官网</a> 下载<a href="http://old-releases.ubuntu.com/releases/18.04.4/ubuntu-18.04-desktop-amd64.iso" target="_blank" rel="noopener">desktop版的ubuntu</a>，注意这里的amd64就是x86-64</p>
-</li>
-<li><p>将u盘插入电脑，启动refus，界面如下<br><img src="refus-1.jpg" alt=""><br>其中设备显示的就是你插入的U盘</p>
-</li>
-<li><p>选择ubuntu iso文件 引导类型选择——镜像文件(请选择)——选择——选中你的iso文件<br><img src="refus-2.jpg" alt=""><br>引导类型(bootloader)：bootloader 是在操作系统内核运行之前运行的一段小程序。通过这段小程序，我们可以初始化硬件设备、建立内存空间的映射图，从而将系统的软硬件环境带到一个合适的状态，以便为最终调用操作系统内核准备好正确的环境。<br>下面的FreeDOS、Syslinux、ReactOS、Grub、UEFI:NTFS都是一些引导程序选项，这里面大家熟悉的估计就是Grub了，GNU GRUB（GRand Unified Bootloader简称“GRUB”）是一个来自GNU项目的多操作系统启动程序。GRUB是多启动规范的实现，它允许用户可以在计算机内同时拥有多个操作系统，并在计算机启动时选择希望运行的操作系统。简单说，你想装双系统，你的bootloader基本就是Grub。<br><img src="refus-3.jpg" alt=""><br>持久分区大小(Persistent partition size): 这个分区用来存储你使用U盘里的linux系统(try linux/ubuntu)时的changes, 例如新建一个文件。如果你不需要try linux，就设置为0.<br><img src="refus-4.jpg" alt=""><br>分区类型(MBR/GPT)：<a href="https://blog.51cto.com/groot/1842985" target="_blank" rel="noopener">详解</a><br>目标系统类型(BIOS/UEFI): <a href="https://www.zhihu.com/question/21672895" target="_blank" rel="noopener">详解</a><br><img src="refus-5.jpg" alt=""><br>文件系统(FAT32/NTFS)：<a href="https://zhuanlan.zhihu.com/p/32364955" target="_blank" rel="noopener">详解</a><br><img src="refus-6.jpg" alt=""></p>
-</li>
-<li><p>刷入iso文件</p>
-<p><img src="refus-7.jpg" alt=""></p>
-</li>
-</ol>
-<p>这样我们就得到了一个u盘系统盘。</p>
-<p>参考 <a href="https://blog.51cto.com/jk6627/1967667" target="_blank" rel="noopener">https://blog.51cto.com/jk6627/1967667</a><br><a href="https://www.zhihu.com/question/28471913" target="_blank" rel="noopener">https://www.zhihu.com/question/28471913</a></p>
-
-      
-      <!-- 打赏 -->
-      
-      <div id="reward-btn">
-        打赏
-      </div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/11/21/%E5%88%B6%E4%BD%9CU%E7%9B%98%E7%B3%BB%E7%BB%9F%E7%9B%98/" data-id="ckrc233dk004hm0j53rq14l86"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B6%E4%BD%9Cu%E7%9B%98%E7%B3%BB%E7%BB%9F%E7%9B%98/" rel="tag">制作u盘系统盘</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-  
-  <nav class="article-nav">
-    
-      <a href="/2020/11/22/adbuninstall%E4%B8%8E%E5%9C%A8%E6%A1%8C%E9%9D%A2%E5%8D%B8%E8%BD%BD%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            adb install&amp;uninstall 原理
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2020/11/18/POSIX%E8%A7%84%E8%8C%83%E4%BB%8B%E7%BB%8D/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">POSIX规范介绍</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-  
-<!-- valine评论 -->
-<div id="vcomments-box">
-    <div id="vcomments">
-    </div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        notify: false,
-        verify: '',
-        app_id: '',
-        app_key: '',
-        path: window.location.pathname,
-        avatar: 'mp',
-        placeholder: '给我的文章加点评论吧~',
-        recordIP: true
-    });
-    const infoEle = document.querySelector('#vcomments .info');
-    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-        infoEle.childNodes.forEach(function (item) {
-            item.parentNode.removeChild(item);
-        });
-    }
-</script>
-<style>
-    #vcomments-box {
-        padding: 5px 30px;
-    }
-
-    @media screen and (max-width: 800px) {
-        #vcomments-box {
-            padding: 5px 0px;
-        }
-    }
-
-    #vcomments-box #vcomments {
-        background-color: #fff;
-    }
-
-    .v .vlist .vcard .vh {
-        padding-right: 20px;
-    }
-
-    .v .vlist .vcard {
-        padding-left: 10px;
-    }
-</style>
-
-  
-
-  
-  
-  
-
 </article>
+      
+      
+    </div>
+  </div>
+  
+  
+
+  
 </section>
       <footer class="footer">
   <div class="outer">
@@ -364,30 +229,6 @@
 </script>
 
 
-
-
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer:'main',
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
-    onClick: (e) => {
-      $('.toc-link').removeClass('is-active-link');
-      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
-      $(e.target.hash).scrollIntoView();
-      return false;
-    }
-  });
-</script>
 
 
 <script>

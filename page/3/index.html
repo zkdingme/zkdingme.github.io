@@ -71,6 +71,87 @@
     
     
     
+    <article id="post-POSIX规范介绍" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/18/POSIX%E8%A7%84%E8%8C%83%E4%BB%8B%E7%BB%8D/"
+    >POSIX规范介绍</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/18/POSIX%E8%A7%84%E8%8C%83%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time datetime="2020-11-18T08:13:39.000Z" itemprop="datePublished">2020-11-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E6%9D%82%E8%B0%88/">计算机基础杂谈</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>wikipedia定义：</p>
+<blockquote>
+<p><strong>可移植操作系统接口</strong>（英语：Portable Operating System Interface，缩写为<strong>POSIX</strong>）是<a href="https://zh.wikipedia.org/wiki/IEEE" target="_blank" rel="noopener">IEEE</a>为要在各种<a href="https://zh.wikipedia.org/wiki/UNIX" target="_blank" rel="noopener">UNIX</a><a href="https://zh.wikipedia.org/wiki/操作系统" target="_blank" rel="noopener">操作系统</a>上运行软件，而定义<a href="https://zh.wikipedia.org/wiki/API" target="_blank" rel="noopener">API</a>的一系列互相关联的标准的总称，其正式称呼为IEEE Std 1003，而国际标准名称为<a href="https://zh.wikipedia.org/wiki/ISO" target="_blank" rel="noopener">ISO</a>/<a href="https://zh.wikipedia.org/wiki/IEC" target="_blank" rel="noopener">IEC</a> 9945。此标准源于一个大约开始于1985年的项目。POSIX这个名称是由<a href="https://zh.wikipedia.org/wiki/理查德·斯托曼" target="_blank" rel="noopener">理查德·斯托曼</a>（RMS）应IEEE的要求而提议的一个易于记忆的名称。它基本上是Portable Operating System Interface（可移植操作系统接口）的缩写，而<strong>X</strong>则表明其对Unix API的传承。</p>
+<p><a href="https://zh.wikipedia.org/wiki/Linux" target="_blank" rel="noopener">Linux</a>基本上逐步实现了POSIX兼容，但并没有参加正式的POSIX认证。<a href="https://zh.wikipedia.org/wiki/可移植操作系统接口#cite_note-1" target="_blank" rel="noopener">[1]</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/微软" target="_blank" rel="noopener">微软</a>的<a href="https://zh.wikipedia.org/wiki/Windows_NT" target="_blank" rel="noopener">Windows NT</a>声称部分实现了POSIX标准。</p>
+<p>当前的POSIX主要分为四个部分<a href="https://zh.wikipedia.org/wiki/可移植操作系统接口#cite_note-2" target="_blank" rel="noopener">[2]</a>：Base Definitions、System Interfaces、Shell and Utilities和Rationale。</p>
+</blockquote>
+<p>《深入理解计算机系统》第二版 p11</p>
+<blockquote>
+<p>20世纪60年代是大型、复杂操作系统盛行的年代，比如IBM的OS/360和Honeywell的Multics系统。OS/360是历史上最成功的软件项目之一，而 Multics虽然持续存在了多年，却从来没有被广泛应用过。贝尔实验室曾经是Multics项目的最初参与者，但是因为考虑到该项目的复杂性和缺乏进展而于1969年退出。鉴于Mutics项目不愉快的经历，一群贝尔实验室的研究人员Ken Thompson、 Dennis Ritchie、 Doug Mcllroy和 Joe Ossanna，从1969年开始在DEC PDP-7计算机上完全用机器语言编写了一个简单得多的操作系统。这个新系统中的很多思想，比如层次文件系统、作为用户级进程的 shell概念，都是来自于 Multics，只不过在一个更小、更简单的程序包里实现。1970年，Brian Kernighan给新系统命名为“Unix”，这也是一个双关语，暗指“Multics”的复杂性。1973年用C重新编写其内核，1974年，Unix开始正式对外发布。</p>
+<p>贝尔实验室以慷慨的条件向学校提供源代码，所以Unix在大专院校里获得了很多支持并得以持续发展。最有影响的工作发生在20世纪70年代晚期到80年代早期，在美国加州大学伯克利分校，研究人员在一系列发布版本中增加了虚拟内存和Internet协议，称为Unix4.xBSD(Berkeley Software Distribution)。与此同时，贝尔实验室也在发布自己的版本，称为System V Unix。其他厂商的版本，比如Sun Microsystems的Solaris系统,则是从这些原始的BSD和System V版本中衍生而来。</p>
+<p>20世纪80年代中期，Unix厂商试图通过加入新的、往往不兼容的特性来使它们的程序与众不同，麻烦也就随之而来了。为了阻止这种趋势，IEEE(电气和电子工程师协会)开始努力标准化Unix的开发，后来由 Richard Stallman命名为“Posix”。结果就得到了一系列的标准，称作Posix标准。这套标准涵盖了很多方面，比如Unix系统调用的C语言接口、shell程序和工具、线程及网络编程。最近，一个被称为“标准Unix规范”的独立标准化工作已经与Posix一起创建了统一的Unix系统标准。这些标准化工作的结果是Unix版本之间的差异已经基本消失。</p>
+</blockquote>
+<p>简单说，POSIX是一个规范，规范操作系统对应用层提供的API。背景是当时Unix碎片化，各家厂商都维护自家的Unix系统，给自家Unix里面加各种特色功能，导致应用层软件开发者们很无奈，所以IEEE站出来说，为了软件开发者们少操心，大家统一一下接口。</p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2020/11/18/POSIX%E8%A7%84%E8%8C%83%E4%BB%8B%E7%BB%8D/" data-id="ckrc233bt000hm0j5cb6f1odq"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/POSIX/" rel="tag">POSIX</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-计算机安全术语概念" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -141,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/11/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD%E6%A6%82%E5%BF%B5/" data-id="ckr1nqe6d003frkj5g382bj79"
+      <a data-url="https://zkdingme.github.io/2020/11/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD%E6%A6%82%E5%BF%B5/" data-id="ckrc233dl004om0j5e6ch0smd"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li></ul>
@@ -370,7 +451,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/11/13/%E5%A4%96%E5%8D%96%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%B9%E5%99%A8%E5%8C%96%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E8%BF%9B/" data-id="ckr1nqe6b0038rkj5d779c1qf"
+      <a data-url="https://zkdingme.github.io/2020/11/13/%E5%A4%96%E5%8D%96%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%B9%E5%99%A8%E5%8C%96%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E8%BF%9B/" data-id="ckrc233dp0050m0j5hjmidl0h"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8%E5%8C%96/" rel="tag">容器化</a></li></ul>
@@ -438,7 +519,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/11/13/CCF2019/" data-id="ckr1nqe4v0001rkj58t92gcwz"
+      <a data-url="https://zkdingme.github.io/2020/11/13/CCF2019/" data-id="ckrc233bk0004m0j5foq50q6i"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CCF%E6%8E%A8%E8%8D%90%E5%AD%A6%E6%9C%AF%E4%BC%9A%E8%AE%AE2019/" rel="tag">CCF推荐学术会议2019</a></li></ul>
@@ -642,7 +723,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/11/12/%E4%BB%8E%E6%8A%80%E6%9C%AF%E6%BC%94%E5%8F%98%E7%9A%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E4%BA%92%E8%81%94%E7%BD%91%E5%90%8E%E5%8F%B0%E6%9E%B6%E6%9E%84/" data-id="ckr1nqe67002vrkj5emozf6yl"
+      <a data-url="https://zkdingme.github.io/2020/11/12/%E4%BB%8E%E6%8A%80%E6%9C%AF%E6%BC%94%E5%8F%98%E7%9A%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E4%BA%92%E8%81%94%E7%BD%91%E5%90%8E%E5%8F%B0%E6%9E%B6%E6%9E%84/" data-id="ckrc233dj004fm0j55qreem05"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98/" rel="tag">后端架构演变</a></li></ul>
@@ -723,7 +804,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/11/05/trojan-proxy-gfw/" data-id="ckr1nqe64002nrkj550hb089d"
+      <a data-url="https://zkdingme.github.io/2020/11/05/trojan-proxy-gfw/" data-id="ckrc233di004cm0j5g72hfk9b"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/trojan/" rel="tag">trojan</a></li></ul>
@@ -812,7 +893,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/10/24/Mac-manage-mul-sshkey/" data-id="ckr1nqe5e000krkj5hxoogtky"
+      <a data-url="https://zkdingme.github.io/2020/10/24/Mac-manage-mul-sshkey/" data-id="ckrc233bx000om0j5dlfadco7"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E6%9C%BA%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAssh-key/" rel="tag">单机管理多个ssh-key</a></li></ul>
@@ -884,7 +965,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/10/12/%E5%8F%91%E7%8E%B0%E5%BC%82%E5%B8%B8/" data-id="ckr1nqe690031rkj5eacz71wl"
+      <a data-url="https://zkdingme.github.io/2020/10/12/%E5%8F%91%E7%8E%B0%E5%BC%82%E5%B8%B8/" data-id="ckrc233dl004km0j5fwd91zxt"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%91%E7%8E%B0%E5%BC%82%E5%B8%B8/" rel="tag">发现异常</a></li></ul>
@@ -957,7 +1038,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/09/30/Android-Dumpdex/" data-id="ckr1nqe4y0004rkj5elka00ma"
+      <a data-url="https://zkdingme.github.io/2020/09/30/Android-Dumpdex/" data-id="ckrc233b90000m0j582otghfx"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%84%B1%E5%A3%B3/" rel="tag">脱壳</a></li></ul>
@@ -1029,107 +1110,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/09/29/android-type3-error/" data-id="ckr1nqe5t001lrkj5gybkdssl"
+      <a data-url="https://zkdingme.github.io/2020/09/29/android-type3-error/" data-id="ckrc233c7001em0j52i4p3tqw"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Debug/" rel="tag">Debug</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-ssh-remote-tunnel" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/09/26/ssh-remote-tunnel/"
-    >ssh remote tunnel 介绍</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/09/26/ssh-remote-tunnel/" class="article-date">
-  <time datetime="2020-09-26T12:53:24.000Z" itemprop="datePublished">2020-09-26</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p><strong>转载自 <a href="https://blog.csdn.net/blade2001/article/details/8877250" target="_blank" rel="noopener">https://blog.csdn.net/blade2001/article/details/8877250</a></strong></p>
-<p>SSH的的Port Forward，中文可以称为端口转发，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。下面仔细就仔细讨论SSH的这种非常有用的功能。</p>
-<p>SSH Tunnel有三种，分别是本地Local（ssh -NfL），远程Remote（ssh -NfR），动态Dynamic（ssh -NfD）。（含义参考<a href="http://linux.die.net/man/1/ssh" target="_blank" rel="noopener">man ssh</a>）</p>
-<p>说明：在我们举例说明用法之前，先假设你有一台SSH机器，它的IP是a.b.c.d。</p>
-<p>1：本地Local（ssh -NfL）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L &lt;local port&gt;:&lt;remote host&gt;:&lt;remote port&gt; &lt;SSH hostname&gt;</span><br></pre></td></tr></table></figure>
-
-<p>ssh -NfL a.b.c.d : 1234 : <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> : 80  a.b.c.d</p>
-<p>此时，在浏览器里键入：<a href="http://a.b.c.d:1234" target="_blank" rel="noopener">http://a.b.c.d:1234</a> 就会看到Google的页面了。</p>
-<p>在绑定1234端口的时候，可以省略前面的ip，如此一来，1234端口就仅仅绑定在localhost地址上，更安全：</p>
-<p>ssh -NfL 1234 : <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> : 80  a.b.c.d</p>
-<p>此时浏览的话就要在a.b.c.d机器上使用<a href="http://localhost:1234" target="_blank" rel="noopener">http://localhost:1234</a> 了。</p>
-<p><strong><em>\</em>何时使用本地Tunnel？\</strong></p>
-<p>*<em>比如说你在本地访问不了某个网络服务（如<a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> ，而有一台机器（如：a.b.c.d）可以，那么你就可以通过这台机器来访问。***</em></p>
-<p>2：远程Remote（ssh -NfR）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -R &lt;local port&gt;:&lt;remote host&gt;:&lt;remote port&gt; &lt;SSH hostname&gt;</span><br></pre></td></tr></table></figure>
-
-<p>在需要被访问的内网机器上运行： ssh -NfR 1234 : localhost : 22  a.b.c.d</p>
-<p>登录到a.b.c.d机器，使用如下命令连接内网机器：</p>
-<p>ssh -p 1234  localhost</p>
-<p>需要注意的是上下两个命令里的localhost不是同一台。这时你会发现自己已经连上最开始命令里的localhost机器了，也就是执行“ssh -NfR”的那台机器。</p>
-<p><strong><em>\</em>何时使用远程Tunnel？\</strong></p>
-<p>*<em>比如当你下班回家后就访问不了公司内网的机器了，遇到这种情况可以事先在公司内网的机器上执行远程Tunnel，连上一台公司外网的机器，等你下班回家后 就可以通过公司外网的机器去访问公司内网的机器了。***</em></p>
-<p>3：动态Dynamic（ssh -NfD）<strong>-\</strong>Socket代理****</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D</span><br></pre></td></tr></table></figure>
-
-<p>ssh -NfD 1234  a.b.c.d</p>
-<p>a.b.c.c 是server 地址</p>
-<p>如此一来就建立了一台Socket代理机器，接着在浏览器上设置Socket代理：地址是localhost，端口是1234，从此以后，你的访问都是加 密的了！你可以通过访问 <a href="http://www.whatismyip.com/" target="_blank" rel="noopener">WhatIsMyIP</a> 来 确认自己现在的IP，看看是不是已经变成a.b.c.d了。</p>
-<p>测试阶段，也可以把端口绑定在外网地址上，如此一来，你在浏览器上就可以使用外网地址设置Socket代理，但这仅限于测试，否则，你的机器就不安全了， 随时可能成为肉鸡。对于Windows用户来说，如果讨厌命令行，还可以使用MyEnTunnel来实现同样的功能，配合Firefox的 FoxyPorxy，基本就无敌了，至于具体的配置方法，小崔已经写好了： <a href="http://fendou.org/2010/01/19/firefox-foxyproxy-ssh/" target="_blank" rel="noopener">使用Firefox+foxyProxy+SSH翻山越岭</a> 。如果你使用的是Chrome的话，则可以选择 Proxy Switchy!来实现同样的效果，恕不多言。</p>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/09/26/ssh-remote-tunnel/" data-id="ckr1nqe63002jrkj55wsd3o2j"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh-tunnel/" rel="tag">ssh tunnel</a></li></ul>
 
     </footer>
 

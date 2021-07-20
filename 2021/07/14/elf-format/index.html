@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    计算机安全术语概念 |  丁星乐
+    elf 格式简介 |  丁星乐
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -35,7 +35,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-计算机安全术语概念" class="article article-type-post" itemscope
+  <article id="post-elf-format" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -43,7 +43,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  计算机安全术语概念
+  elf 格式简介
 </h1>
   
 
@@ -52,12 +52,12 @@
 
     
     <div class="article-meta">
-      <a href="/2020/11/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD%E6%A6%82%E5%BF%B5/" class="article-date">
-  <time datetime="2020-11-17T04:35:45.000Z" itemprop="datePublished">2020-11-17</time>
+      <a href="/2021/07/14/elf-format/" class="article-date">
+  <time datetime="2021-07-14T11:23:49.000Z" itemprop="datePublished">2021-07-14</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8/">计算机安全</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </div>
 
       
@@ -67,7 +67,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.9k字</span>
+            <span class="post-count">745字</span>
         </span>
     </span>
 
@@ -76,7 +76,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">6分钟</span>
+            <span class="post-count">2分钟</span>
         </span>
     </span>
 </div>
@@ -87,6 +87,8 @@
 
     
     
+    <div class="tocbot"></div>
+
 
 
 
@@ -100,28 +102,90 @@
       
 
       
-      <p>转载 <a href="https://blog.csdn.net/qq_37622608/article/details/88048847" target="_blank" rel="noopener">https://blog.csdn.net/qq_37622608/article/details/88048847</a></p>
-<p><strong>1.POC</strong></p>
-<p><code>POC，Proof ofConcept</code>，中文意思是“<code>观点证明</code>”。这个短语会在漏洞报告中使用，漏洞报告中的POC则是<code>一段说明或者一个攻击的样</code>例，使得读者能够确认这个漏洞是真实存在的。<br><strong>2.EXP</strong></p>
-<p><code>EXP</code>，Exploit，中文意思是“<code>漏洞利用</code>”。意思是一段对漏洞<code>如何利用的详细说明或者一个演示的漏洞攻击代码</code>，可以使得读者完全了解漏洞的机理以及利用的方法。<br><strong>3.VUL</strong></p>
-<p><code>VUL</code>，Vulnerability的缩写，泛指<code>漏洞</code>。<br><strong>4.CVE漏洞编号</strong></p>
-<p><code>CVE</code> 的英文全称是“Common Vulnerabilities &amp; Exposures”公共漏洞和暴露，例如CVE-2015-0057、CVE-1999-0001等等。CVE就好像是一个字典表，为广泛认同的信息安全漏洞或者已经暴露出来的弱点给出一个公共的名称。如果在一个漏洞报告中指明的一个漏洞，如果有CVE名称，你就可以快速地在任何其它CVE兼容的数据库中找到相应修补的信息，解决安全问题。</p>
-<p>可以在<a href="https://cve.mitre.org/网站根据漏洞的CVE编号搜索该漏洞的介绍。" target="_blank" rel="noopener">https://cve.mitre.org/网站根据漏洞的CVE编号搜索该漏洞的介绍。</a></p>
-<p>也可以在中文社区<a href="http://www.scap.org.cn/上搜索关于漏洞的介绍" target="_blank" rel="noopener">http://www.scap.org.cn/上搜索关于漏洞的介绍</a></p>
-<p><strong>5.0DAY漏洞和0DAY攻击</strong></p>
-<p>在计算机领域中，零日漏洞或零时差漏洞（英语：Zero-dayexploit）通常是指还没有补丁的安全漏洞，而零日攻击或零时差攻击（英语：Zero-dayattack）则是指利用这种漏洞进行的攻击。提供该漏洞细节或者利用程序的人通常是该漏洞的发现者。零日漏洞的利用程序对网络安全具有巨大威胁，因此零日漏洞不但是黑客的最爱，掌握多少零日漏洞也成为评价黑客技术水平的一个重要参数。<br>零日漏洞及其利用代码不仅对犯罪黑客而言，具有极高的利用价值，一些国家间谍和网军部队，例如美国国家安全局和美国网战司令部也非常重视这些信息[1]。据路透社报告称美国政府是零日漏洞黑市的最大买家。</p>
-<p><strong>6.APT攻击</strong></p>
-<p>APT攻击是一个集合了多种常见攻击方式的综合攻击。综合多种攻击途径来尝试突破网络防御，通常是通过Web或电子邮件传递，利用应用程序或操作系统的漏洞，利用传统的网络保护机制无法提供统一的防御。除了使用多种途径，高级定向攻击还采用多个阶段穿透一个网络，然后提取有价值的信息，这使得它的攻击更不容易被发现。</p>
-<p><strong>7.ARP攻击</strong></p>
-<p>地址解析协议，即ARP（Address Resolution Protocol），是根据<a href="https://baike.baidu.com/item/IP地址" target="_blank" rel="noopener">IP地址</a>获取<a href="https://baike.baidu.com/item/物理地址/2129" target="_blank" rel="noopener">物理地址</a>的一个<a href="https://baike.baidu.com/item/TCP%2FIP协议" target="_blank" rel="noopener">TCP/IP协议</a>。<a href="https://baike.baidu.com/item/主机/455151" target="_blank" rel="noopener">主机</a>发送信息时将包含目标IP地址的ARP请求广播到局域网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。地址解析协议是建立在网络中各个主机互相信任的基础上的，局域网络上的主机可以自主发送ARP应答消息，其他主机收到应答报文时不会检测该报文的真实性就会将其记入本机ARP缓存；由此攻击者就可以向某一主机发送伪ARP应答报文，使其发送的信息无法到达预期的主机或到达错误的主机，这就构成了一个<a href="https://baike.baidu.com/item/ARP欺骗" target="_blank" rel="noopener">ARP欺骗</a>。<a href="https://baike.baidu.com/item/ARP命令" target="_blank" rel="noopener">ARP命令</a>可用于查询本机ARP缓存中IP地址和<a href="https://baike.baidu.com/item/MAC地址" target="_blank" rel="noopener">MAC地址</a>的对应关系、添加或删除静态对应关系等。相关协议有<a href="https://baike.baidu.com/item/RARP" target="_blank" rel="noopener">RARP</a>、<a href="https://baike.baidu.com/item/代理ARP" target="_blank" rel="noopener">代理ARP</a>。<a href="https://baike.baidu.com/item/NDP" target="_blank" rel="noopener">NDP</a>用于在<a href="https://baike.baidu.com/item/IPv6" target="_blank" rel="noopener">IPv6</a>中代替地址解析协议。</p>
-<p><strong>8.ROP攻击</strong></p>
-<p>ROP全称为Return-oriented Programming（面向返回的编程）是一种新型的基于代码复用技术的攻击，攻击者从已有的库或可执行文件中提取指令片段，构建恶意代码。</p>
-<p>ROP的核心思想：攻击者扫描已有的<a href="https://baike.baidu.com/item/动态链接库/100352" target="_blank" rel="noopener">动态链接库</a>和可执行文件，提取出可以利用的指令片段(gadget)，这些指令片段均以ret指令结尾，即用ret指令实现指令片段执行流的衔接。操作系统通过栈来进行函数的调用和返回。函数的调用和返回就是通过压栈和出栈来实现的。每个程序都会维护一个程序运行栈，栈为所有函数共享，每次函数调用，系统会分配一个栈桢给当前被调用函数，用于参数的传递、局部变量的维护、返回地址的填入等。栈帧是程序运行栈的一部分 ，在<a href="https://baike.baidu.com/item/Linux" target="_blank" rel="noopener">Linux</a>中 ，通过%esp和 %ebp寄存器维护栈顶指针和栈帧的起始地址 ，%eip是程序计数器寄存器 [1] 。而ROP攻击则是利用以ret结尾的程序片段 ，操作这些栈相关寄存器，控制程序的流程，执行相应的gadget，实施攻击者预设目标 。ROP不同于retum-to-libc攻击之处在于，ROP攻击以ret指令结尾的函数代码片段 ，而不是整个函数本身去完成预定的操作。从广义角度讲 ，return-to-libc攻击是ROP攻的特例。最初ROP攻击实现在x86体系结构下，随后扩展到各种体系结构.。与以往攻击技术不同的是，ROP恶意代码不包含任何指令，将自己的恶意代码隐藏在正常代码中。因而，它可以绕过W⊕X的防御技术。</p>
-<p><strong>9.buffer overflow攻击</strong></p>
-<p><a href="https://baike.baidu.com/item/缓冲区" target="_blank" rel="noopener">缓冲区</a>溢出是指当<a href="https://baike.baidu.com/item/计算机/140338" target="_blank" rel="noopener">计算机</a>向缓冲区内填充数据位数时超过了缓冲区本身的容量，溢出的数据覆盖在合法数据上。理想的情况是：程序会检查数据长度，而且并不允许输入超过缓冲区长度的字符。但是绝大多数程序都会假设数据长度总是与所分配的储存空间相匹配，这就为缓冲区溢出埋下隐患。操作系统所使用的缓冲区，又被称为“<a href="https://baike.baidu.com/item/堆栈" target="_blank" rel="noopener">堆栈</a>”，在各个操作进程之间，指令会被临时储存在“堆栈”当中，“堆栈”也会出现<a href="https://baike.baidu.com/item/缓冲区溢出/678453" target="_blank" rel="noopener">缓冲区溢出</a>。</p>
-<p><strong>10.RCE漏洞</strong></p>
-<p>远程代码执行漏洞</p>
-<p>该生热爱祖国、热爱集体，拥护中国共产党的领导，在日常学习生活中，起到党员模范带头作用，政治立场坚定，组织观念强，坚决贯彻党的路线方针政策。<br>该生在研究生期间学习努力认真，已完成研究生毕业的学分要求。成绩优异。在实验室里刻苦钻研，踏实肯干，具有较强的科研能力和实践能力，目前已完成巨型虚拟机项目，发表小论文1篇，毕业设计方向为数据中心与分布式系统。<br>该生勤俭节约，尊重师长，团结同学，积极参加班级活动，与同学们相处融洽。<br>综上所述，该生在校期间各方面表现良好。</p>
+      <h2 id="1-elf是什么"><a href="#1-elf是什么" class="headerlink" title="1. elf是什么"></a>1. elf是什么</h2><p>维基百科介绍如下：</p>
+<blockquote>
+<p><strong>可执行与可链接格式</strong> （英语：Executable and Linkable Format，缩写为ELF），常被称为<strong>ELF格式</strong>，在<a href="https://zh.wikipedia.org/wiki/電腦科學" target="_blank" rel="noopener">计算机科学</a>中，是一种用于<a href="https://zh.wikipedia.org/wiki/執行檔" target="_blank" rel="noopener">可执行文件</a>、<a href="https://zh.wikipedia.org/wiki/目的檔" target="_blank" rel="noopener">目标文件</a>、<a href="https://zh.wikipedia.org/wiki/共享库" target="_blank" rel="noopener">共享库</a>和核心转储(core dump)的标准<a href="https://zh.wikipedia.org/wiki/檔案格式" target="_blank" rel="noopener">文件格式</a>。</p>
+</blockquote>
+<p>Linux 中</p>
+<p>例如Linux中可执行文件ls, grep之类的，或者共享库libc.so 都是elf格式。</p>
+<h2 id="2-elf文件格式是什么样的，有图吗"><a href="#2-elf文件格式是什么样的，有图吗" class="headerlink" title="2. elf文件格式是什么样的，有图吗"></a>2. elf文件格式是什么样的，有图吗</h2><p><img src="/Users/dingzhenkai/Documents/JSProj/blog/source/_posts/elf-format/elf-format.png" alt=""></p>
+<ul>
+<li><p>ELF header：在文件的开始，描述整个文件的组织。</p>
+</li>
+<li><p>Program header table：告诉系统如何创建进程映像。用来构造进程映像的目标文件必须具有程序头部表，可重定位文件不需要这个表。</p>
+</li>
+<li><p>Section header table ：包含了描述文件节区的信息，每个节区在表中都有一项，每一项给出诸如节区名称、节区大小这类信息。用于链接的目标文件必须包含节区头部表，其他目标文件可以有，也可以没有这个表。</p>
+</li>
+<li><p>sections 或者 segments：segments是从运行的角度来描述elf文件，sections是从链接的角度来描述elf文件，也就是说，在链接阶段，我们可以忽略program header table来处理此文件，在运行阶段可以忽略section header table来处理此程序（所以很多加固手段删除了section header table）。注意：segments与sections是包含的关系，一个segment包含若干个section。</p>
+</li>
+</ul>
+<p><strong>Section 有哪些</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.cpp </span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>; <span class="comment">// .data</span></span><br><span class="line"><span class="keyword">char</span> *p1; <span class="comment">// .bss</span></span><br><span class="line">main() </span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">int</span> b; <span class="comment">// 栈</span></span><br><span class="line"><span class="keyword">char</span> s[] = <span class="string">"abc"</span>; <span class="comment">// 栈</span></span><br><span class="line"><span class="keyword">char</span> *p2; <span class="comment">// 栈</span></span><br><span class="line"><span class="keyword">char</span> *p3 = <span class="string">"123456"</span>; <span class="comment">// p3 在栈上, "123456" 在 rodata</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> c =<span class="number">0</span>； <span class="comment">// .data</span></span><br><span class="line">p1 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">10</span>); </span><br><span class="line">p2 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">20</span>); </span><br><span class="line"><span class="comment">// 分配得来得10和20字节的区域就在堆区。 </span></span><br><span class="line"><span class="built_in">strcpy</span>(p1, <span class="string">"123456"</span>); <span class="comment">// 123456放在常量区，编译器可能会将它与p3所指向的"123456"优化成一个地方。 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>.bss </p>
+<p>未初始化的全局变量和静态变量，初始化为0的全局变量和静态变量也在.bss，如果数据全是零，为了优化考虑，编译器把它当作bss处理</p>
+<p>.bss 段不占elf文件空间，其内容由操作系统初始化，统一初始化为0 .bss类型的全局变量只占运行时的内存空间，而不占文件空间</p>
+</li>
+<li><p>.comment </p>
+<p>一些版本信息</p>
+</li>
+<li><p>.data .data1 </p>
+<p>静态初始化(非零)的数据，所以有初值的全局变量和static变量在data区</p>
+</li>
+<li><p>.debug </p>
+</li>
+<li><p>.dynamic </p>
+</li>
+<li><p>.dynstr </p>
+</li>
+<li><p>.dynsym </p>
+</li>
+<li><p>.fini </p>
+</li>
+<li><p>.got </p>
+<p>外部变量引用的地址</p>
+</li>
+<li><p>.hash </p>
+</li>
+<li><p>.init </p>
+</li>
+<li><p>.interp </p>
+</li>
+<li><p>.line </p>
+</li>
+<li><p>.note </p>
+</li>
+<li><p>.plt </p>
+</li>
+<li><p>.plt.got</p>
+<p>外部函数引用的地址</p>
+<p><a href="https://gtoad.github.io/2018/07/05/Android-Native-Hook/" target="_blank" rel="noopener">https://gtoad.github.io/2018/07/05/Android-Native-Hook/</a></p>
+</li>
+<li><p>.relname</p>
+</li>
+<li><p>.relaname </p>
+</li>
+<li><p>.rodata .rodata1 </p>
+<p>存放常量</p>
+<p>用const修饰的变量放在 rodata 里，字符串默认就是常量, #define定义的常量</p>
+<p>const修饰的全局变量在常量区；const修饰的局部变量只是为了防止修改，没有放入常量区</p>
+<p><a href="https://blog.csdn.net/laiqun_ai/article/details/8528366" target="_blank" rel="noopener">https://blog.csdn.net/laiqun_ai/article/details/8528366</a></p>
+</li>
+<li><p>.shstrtab </p>
+</li>
+<li><p>.strtab </p>
+</li>
+<li><p>.symtab </p>
+</li>
+<li><p>.text</p>
+<p>代码</p>
+</li>
+</ul>
+<p>参考： <a href="https://refspecs.linuxfoundation.org/elf/elf.pdf" target="_blank" rel="noopener">https://refspecs.linuxfoundation.org/elf/elf.pdf</a></p>
+<p><a href="https://bbs.pediy.com/thread-259901.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-259901.htm</a></p>
 
       
       <!-- 打赏 -->
@@ -132,10 +196,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/11/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD%E6%A6%82%E5%BF%B5/" data-id="ckrc233dl004om0j5e6ch0smd"
+      <a data-url="https://zkdingme.github.io/2021/07/14/elf-format/" data-id="ckrc233cf0021m0j55073aj8f"
         class="article-share-link">分享</a>
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elf/" rel="tag">elf</a></li></ul>
 
     </footer>
 
@@ -145,19 +209,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/11/18/POSIX%E8%A7%84%E8%8C%83%E4%BB%8B%E7%BB%8D/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            POSIX规范介绍
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/11/13/%E5%A4%96%E5%8D%96%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%B9%E5%99%A8%E5%8C%96%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E8%BF%9B/" class="article-nav-link">
+      <a href="/2021/07/11/android-uid/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">外卖客户端容器化架构的演进</div>
+        <div class="article-nav-title">android uid介绍</div>
       </a>
     
   </nav>
