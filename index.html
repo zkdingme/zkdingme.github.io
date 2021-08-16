@@ -71,6 +71,282 @@
     
     
     
+    <article id="post-magisk-install" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/08/13/magisk-install/"
+    >magisk初探</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/13/magisk-install/" class="article-date">
+  <time datetime="2021-08-13T02:47:28.000Z" itemprop="datePublished">2021-08-13</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>本文记录笔者在小米6(sagit)上刷入magisk并使用的过程。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>参照<a href="https://topjohnwu.github.io/Magisk/install.html" target="_blank" rel="noopener">作者写的安装教程</a>。</p>
+<p>注意：刷入patch后的boot.img后还需要继续安装magisk manager才算完成， <a href="https://sspai.com/post/53043" target="_blank" rel="noopener">参考</a>。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>由于它是通过启动时在 boot 中创建钩子，把 /data/magisk.img 挂载到 /magisk，构建出一个在 system 基础上能够自定义替换，增加以及删除的文件系统，所有操作都在启动的时候完成，实际上并没有对 /system 分区进行修改（即 systemless 接口，以不触动 /system 的方式修改 /system）。</p>
+<p>重新mount一个新的文件系统</p>
+<p><strong>mount了哪些分区，APP安装在真实分区还是mount的新分区，APP运行时生成文件是在哪个分区</strong></p>
+<p>mount 了cache data persist sepolicy.rules system vendor在/sbin/.magisk/mirror下面</p>
+<p>data.img 被mount了两次，一次在/data，一次在/sbin/.magisk/mirror/data/</p>
+<p>所以我adb install一个apk，同时写了/data/app 和 /sbin/.magisk/mirror/data/app</p>
+<h3 id="获取ROOT原理"><a href="#获取ROOT原理" class="headerlink" title="获取ROOT原理"></a>获取ROOT原理</h3><h2 id="MagiskHide原理"><a href="#MagiskHide原理" class="headerlink" title="MagiskHide原理"></a>MagiskHide原理</h2><h2 id="如何检测Magisk-及-Magisk-ROOT"><a href="#如何检测Magisk-及-Magisk-ROOT" class="headerlink" title="如何检测Magisk 及 Magisk ROOT"></a>如何检测Magisk 及 Magisk ROOT</h2>
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2021/08/13/magisk-install/" data-id="ckse2s0x0002f3ij5d7hdexyy"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-java-printf" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/08/02/java-printf/"
+    >java格式化输出</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/02/java-printf/" class="article-date">
+  <time datetime="2021-08-02T07:21:54.000Z" itemprop="datePublished">2021-08-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="System-out-format-System-out-printf"><a href="#System-out-format-System-out-printf" class="headerlink" title="System.out.format System.out.printf"></a>System.out.format System.out.printf</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">"Alex has a %d-year-old son named %s, who is %.2f cm tall.\n"</span>, <span class="number">12</span>, <span class="string">"Tom"</span>, <span class="number">123.123</span>d);</span><br><span class="line"><span class="comment">// Alex has a 12-year-old son named Tom, who is 123.12 cm tall.</span></span><br><span class="line">System.out.format(<span class="string">"Alex has a %d-year-old son named %s, who is %2e cm tall.\n"</span>, <span class="number">12</span>, <span class="string">"Tom"</span>, <span class="number">123.123</span>d);</span><br><span class="line"><span class="comment">// Alex has a 12-year-old son named Tom, who is 1.231230e+02 cm tall.</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">Character</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%</td>
+<td align="center">Prints a literal % character (this type doesn’t accept any flags, width, precision, length fields).</td>
+</tr>
+<tr>
+<td align="center">d, i</td>
+<td align="center">int as a signed <a href="https://en.wikipedia.org/wiki/Integer" target="_blank" rel="noopener">integer</a>. %d and %i are synonymous for output, but are different when used with <code>scanf</code> for input (where using %i will interpret a number as hexadecimal if it’s preceded by 0x, and octal if it’s preceded by 0.)</td>
+</tr>
+<tr>
+<td align="center">u</td>
+<td align="center">Print decimal unsigned int.</td>
+</tr>
+<tr>
+<td align="center">f, F</td>
+<td align="center">double in normal (<a href="https://en.wikipedia.org/wiki/Fixed-point_arithmetic" target="_blank" rel="noopener">fixed-point</a>) notation. f and F only differs in how the strings for an infinite number or NaN are printed (inf, infinity and nan for f; INF, INFINITY and NAN for F).</td>
+</tr>
+<tr>
+<td align="center">e, E</td>
+<td align="center">double value in standard form (<em>d</em>.<em>ddd<em>e±</em>dd</em>). An E conversion uses the letter E (rather than e) to introduce the exponent. The exponent always contains at least two digits; if the value is zero, the exponent is 00. In Windows, the exponent contains three digits by default, e.g. 1.5e002, but this can be altered by Microsoft-specific <code>_set_output_format</code> function.</td>
+</tr>
+<tr>
+<td align="center">g, G</td>
+<td align="center">double in either normal or exponential notation, whichever is more appropriate for its magnitude. g uses lower-case letters, G uses upper-case letters. This type differs slightly from fixed-point notation in that insignificant zeroes to the right of the decimal point are not included. Also, the decimal point is not included on whole numbers.</td>
+</tr>
+<tr>
+<td align="center">x, X</td>
+<td align="center">unsigned int as a <a href="https://en.wikipedia.org/wiki/Hexadecimal" target="_blank" rel="noopener">hexadecimal</a> number. x uses lower-case letters and X uses upper-case.</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">unsigned int in octal.</td>
+</tr>
+<tr>
+<td align="center">s</td>
+<td align="center"><a href="https://en.wikipedia.org/wiki/Null-terminated_string" target="_blank" rel="noopener">null-terminated string</a>.</td>
+</tr>
+<tr>
+<td align="center">c</td>
+<td align="center">char (character).</td>
+</tr>
+<tr>
+<td align="center">p</td>
+<td align="center">void* (pointer to void) in an implementation-defined format.</td>
+</tr>
+<tr>
+<td align="center">a, A</td>
+<td align="center">double in hexadecimal notation, starting with 0x or 0X. a uses lower-case letters, A uses upper-case letters.<a href="https://en.wikipedia.org/wiki/Printf_format_string#cite_note-5" target="_blank" rel="noopener">[5]</a><a href="https://en.wikipedia.org/wiki/Printf_format_string#cite_note-6" target="_blank" rel="noopener">[6]</a> (C++11 iostreams have a hexfloat that works the same).</td>
+</tr>
+<tr>
+<td align="center">n</td>
+<td align="center">Print nothing, but writes the number of characters written so far into an integer pointer parameter. In Java this prints a newline.<a href="https://en.wikipedia.org/wiki/Printf_format_string#cite_note-7" target="_blank" rel="noopener">[7]</a></td>
+</tr>
+</tbody></table>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2021/08/02/java-printf/" data-id="ckse2s0ww00213ij5d85a3gpo"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-java-modulo" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/08/02/java-modulo/"
+    >java取模与取余运算</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/02/java-modulo/" class="article-date">
+  <time datetime="2021-08-02T06:58:42.000Z" itemprop="datePublished">2021-08-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>先看几个java 取模的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 % 10 : 1 &#x2F;&#x2F; 1 &#x3D; 0 * 10 + 1</span><br><span class="line">11 % 10 : 1 &#x2F;&#x2F; 11 &#x3D; 1 * 10 + 1</span><br><span class="line">-1 % 10 : -1 &#x2F;&#x2F; -1 &#x3D; 0 * 10 + (-1)</span><br><span class="line">-11 % 10 : -1 &#x2F;&#x2F; -11 &#x3D; -1 * 10 + (-1)</span><br></pre></td></tr></table></figure>
+
+<p>问题的关键在于对负数的处理</p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2021/08/02/java-modulo/" data-id="ckse2s0wu001s3ij5glx766bg"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-elf-format" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -248,7 +524,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/14/elf-format/" data-id="ckrq2qv1f002cb6j58eyjci1c"
+      <a data-url="https://zkdingme.github.io/2021/07/14/elf-format/" data-id="ckse2s0wu001v3ij5duzh3pfl"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elf/" rel="tag">elf</a></li></ul>
@@ -334,7 +610,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/11/android-uid/" data-id="ckrq2qv16001hb6j50i335fn6"
+      <a data-url="https://zkdingme.github.io/2021/07/11/android-uid/" data-id="ckse2s0wp001b3ij52nhmervy"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/did/" rel="tag">did</a></li></ul>
@@ -423,7 +699,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/11/TEE-kiss/" data-id="ckrq2qv120013b6j503yg8boe"
+      <a data-url="https://zkdingme.github.io/2021/07/11/TEE-kiss/" data-id="ckse2s0wg000k3ij51svlbkq7"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TEE/" rel="tag">TEE</a></li></ul>
@@ -522,7 +798,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/07/android-file-format/" data-id="ckrq2qv10000yb6j53ge51ltg"
+      <a data-url="https://zkdingme.github.io/2021/07/07/android-file-format/" data-id="ckse2s0wm00103ij5974p3qz0"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" rel="tag">文件格式</a></li></ul>
@@ -610,7 +886,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/07/06/lineageos-build/" data-id="ckrq2qv1c0020b6j5bsvx6g98"
+      <a data-url="https://zkdingme.github.io/2021/07/06/lineageos-build/" data-id="ckse2s0wy00263ij55l2aaxgc"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lineages/" rel="tag">lineages</a></li></ul>
@@ -691,7 +967,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/06/29/nexus-flush-rom/" data-id="ckrq2qv1e0026b6j585ez1oox"
+      <a data-url="https://zkdingme.github.io/2021/06/29/nexus-flush-rom/" data-id="ckse2s0x1002i3ij5e4b95tbl"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E6%9C%BA/" rel="tag">刷机</a></li></ul>
@@ -778,251 +1054,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/06/28/Android-JS-Debug/" data-id="ckrq2qv0s0008b6j57sbyemom"
+      <a data-url="https://zkdingme.github.io/2021/06/28/Android-JS-Debug/" data-id="ckse2s0w100013ij5anfkfzf8"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/" rel="tag">WebView</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-vpn-proxy" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/15/vpn-proxy/"
-    >VPN与代理的区别</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/06/15/vpn-proxy/" class="article-date">
-  <time datetime="2021-06-15T02:47:48.000Z" itemprop="datePublished">2021-06-15</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p>VPN和PROXY的使用场景很类似，都是利用一个中间服务器转发流量访问某个客户端访问不了的服务。核心区别在于客户端与中间服务器之间的通信是走什么协议。PROXY一般走应用层协议HTTP/HTTPS/SOCKS等，VPN则走比较底层的像数据链路层PPTP和L2TP，网络层的IPSEC等。二者也有相同点，客户端的IP都被重写成中间服务器的IP。</p>
-<p><img src="cross.png" alt=""></p>
-<p>回顾经典的网络架构图</p>
-<p><img src="OSI.png" alt=""></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://blog.z3ratu1.cn/HTTPS%E4%BB%A3%E7%90%86%E5%8E%9F%E7%90%86.html" target="_blank" rel="noopener">HTTPS代理原理</a></li>
-<li><a href="https://lilywei739.github.io/2017/01/25/principle_for_http_https.html" target="_blank" rel="noopener">HTTP、HTTPS代理分析及原理</a></li>
-<li><a href="https://medium.com/@thomas_summon/%E6%B5%85%E8%B0%88vpn-vps-proxy%E4%BB%A5%E5%8F%8Ashadowsocks%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB%E5%92%8C%E5%8C%BA%E5%88%AB-b0198f92db1b" target="_blank" rel="noopener">浅谈vpn、vps、Proxy以及shadowsocks之间的联系和区别</a></li>
-</ol>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/06/15/vpn-proxy/" data-id="ckrq2qv1m002yb6j5d6hgebmj"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/" rel="tag">VPN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-ssh-login-expect" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/18/ssh-login-expect/"
-    >ssh_login_expect</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/18/ssh-login-expect/" class="article-date">
-  <time datetime="2021-05-18T01:43:46.000Z" itemprop="datePublished">2021-05-18</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="解决的问题-使用场景"><a href="#解决的问题-使用场景" class="headerlink" title="解决的问题/使用场景"></a>解决的问题/使用场景</h2><p>ssh每次登陆时都要输入用户名和密码，如果有跳板机，还要输入多次用户名和密码，太慢了。</p>
-<p>因此可以用expect脚本来代替手动ssh过程。</p>
-<h2 id="expect介绍"><a href="#expect介绍" class="headerlink" title="expect介绍"></a>expect介绍</h2><p>TODO</p>
-<h2 id="脚本样例"><a href="#脚本样例" class="headerlink" title="脚本样例"></a>脚本样例</h2><h3 id="不使用跳板机"><a href="#不使用跳板机" class="headerlink" title="不使用跳板机"></a>不使用跳板机</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect -f</span></span><br><span class="line"><span class="built_in">set</span> ip XX.XX.XX.XX</span><br><span class="line"><span class="built_in">set</span> password XXXXXXXX</span><br><span class="line"><span class="built_in">set</span> timeout 10</span><br><span class="line">spawn ssh ubuntu@<span class="variable">$ip</span></span><br><span class="line">expect &#123;</span><br><span class="line"><span class="string">"*yes/no"</span> &#123; send <span class="string">"yes\r"</span>; exp_continue&#125;</span><br><span class="line"><span class="string">"*password:"</span> &#123; send <span class="string">"<span class="variable">$password</span>\r"</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用跳板机"><a href="#使用跳板机" class="headerlink" title="使用跳板机"></a>使用跳板机</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/expect -f</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 跳板机ip password</span></span><br><span class="line">set pedalip XX.XX.XX.XX</span><br><span class="line">set pedalpw XXXXXXXX</span><br><span class="line"><span class="meta">#</span><span class="bash"> 目标机器ip password</span></span><br><span class="line">set targetip XX.XX.XX.XX</span><br><span class="line">set targetpw XXXXXXXX</span><br><span class="line">set timeout 10</span><br><span class="line">spawn ssh ubuntu@$pedalip</span><br><span class="line">expect &#123;</span><br><span class="line">"*yes/no" &#123; send "yes\r"; exp_continue&#125;</span><br><span class="line">"*password:" &#123; send "$pedalpw\r" &#125;</span><br><span class="line">&#125;</span><br><span class="line">expect "*ubuntu@*" &#123; send "ssh ubuntu@$targetip\r"&#125;</span><br><span class="line">expect &#123;</span><br><span class="line">"*yes/no" &#123; send "yes\r"; exp_continue&#125;</span><br><span class="line">"*password:" &#123; send "$targetpw\r" &#125;</span><br><span class="line">&#125;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/05/18/ssh-login-expect/" data-id="ckrq2qv1j002lb6j5bhtsf7d2"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh%E7%99%BB%E9%99%86%E8%84%9A%E6%9C%AC/" rel="tag">ssh登陆脚本</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-linux-vim-kiss" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/04/20/linux-vim-kiss/"
-    >linux_vim_kiss</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/04/20/linux-vim-kiss/" class="article-date">
-  <time datetime="2021-04-20T07:31:38.000Z" itemprop="datePublished">2021-04-20</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p><a href="https://www.runoob.com/linux/linux-vim.html" target="_blank" rel="noopener">菜鸟教程vim介绍</a></p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><strong>上移或下移多行</strong></p>
-<p>向下移动 30 行，可以使用 “30j” 或 “30↓” 的组合按键，↓表示向下键</p>
-<p>向上移动 30 行，可以使用 “30k” 或 “30↑” 的组合按键，↑表示向上键 或者 30+enter</p>
-<p><strong>移动到文件头部</strong></p>
-<p>gg</p>
-<p><strong>移动到文件尾部</strong></p>
-<p>shift+g</p>
-<p><strong>移动到行首</strong></p>
-<p>0</p>
-<p><strong>移动到行尾</strong></p>
-<p>$</p>
-<p><strong>移动到具体某一行</strong></p>
-<p>lineNum+shift+g</p>
-<p><strong>查找字符串</strong></p>
-<p>/word 向光标之下寻找一个名称为 word 的字符串。例如要在档案内搜寻 vbird 这个字符串，就输入 /vbird 即可！ (常用)</p>
-<p>?word  向光标之上寻找一个字符串名称为 word 的字符串。</p>
-<p>n 下一个匹配的字符串</p>
-<p>N 上一个匹配的字符串</p>
-<p><strong>删除游标所在处一整行</strong></p>
-<p>dd</p>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>TODO</p>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2021/04/20/linux-vim-kiss/" data-id="ckrq2qv1g002gb6j5f2ljevit"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
 
     </footer>
 

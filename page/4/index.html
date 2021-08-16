@@ -71,6 +71,223 @@
     
     
     
+    <article id="post-发现异常" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/12/%E5%8F%91%E7%8E%B0%E5%BC%82%E5%B8%B8/"
+    >发现异常</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/10/12/%E5%8F%91%E7%8E%B0%E5%BC%82%E5%B8%B8/" class="article-date">
+  <time datetime="2020-10-12T02:56:21.000Z" itemprop="datePublished">2020-10-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/">数据挖掘</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <ul>
+<li>根据已有异常关联未发现的异常<br>ip在黑名单的用户的其他特征像wifi数量、设备指纹和登陆时间段都可能是异常</li>
+<li>随时间变化不稳定<br>正常用户的属性随时间变化都是稳定的，异常用户是不稳定的</li>
+<li>聚类<br>正常人聚类在一起一大团，异常人聚类一小团</li>
+</ul>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2020/10/12/%E5%8F%91%E7%8E%B0%E5%BC%82%E5%B8%B8/" data-id="ckse2s0x9003e3ij5f9e20jh9"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%91%E7%8E%B0%E5%BC%82%E5%B8%B8/" rel="tag">发现异常</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Android-Dumpdex" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/09/30/Android-Dumpdex/"
+    >Android 壳的背景知识</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/09/30/Android-Dumpdex/" class="article-date">
+  <time datetime="2020-09-30T03:35:48.000Z" itemprop="datePublished">2020-09-30</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>壳是什么，为什么要脱壳，怎么脱壳？</p>
+<p>壳是终端攻防的产物，最早在PC时代就出现了。最早是因为黑产会反编译得到应用程序的源码，然后魔改后重打包再投放到市场上去，这就是所谓的盗版软件，或者就直接在源码里面找到程序的漏洞例如支付漏洞，然后搞破坏。开发者们当然注意到了这些严重的漏洞，所以他们就给程序加壳来抵御黑产的攻击。壳这个名字就很形象的描述了这套防御机制，简单说就是在源码外面套了一层壳保护源码，黑产们想要获得源码需要先打破这层壳或者越过这层壳。加壳显著提高了黑产们获取源码的难度，缓解了之前源码裸奔的尴尬场景。当然攻防是S形向前发展的，当开发者们加壳之后，黑产们很快就研究出了破壳或者说脱壳的方法，开发者们也紧跟着推出了新一代的壳，就这样道高一尺魔高一丈然后又魔高一尺道高一丈相爱相杀。总体来说，壳这个机制还是很有效的，虽然还是存在被脱壳的可能，但是在一次又一次的攻防中，脱壳的难度已经被拉高了太多，这个门槛已经比较高，还在坚持的黑产玩家已经不多了。当然壳也有其不好的一面，首先就是对性能的影响，壳太厚势必会拉低性能，某宝加壳后性能拉低了40-50倍，这还是不断优化后的结果。其次就是其他方面的安全性会降低，安全是一条链，这条链上有很多节点，终端app只是其中一个节点，这条链上还有很多别的节点，任何一颗节点被攻破都会造成大大小小的损失。你在终端壳上投入巨大势必其他方面投入就小了，黑产发现攻你app太难了，肯定就转头去试试你的服务器了。</p>
+<p>移动端兴起之后，这套玩法也传承了下来，早期市场上充斥着大量的盗版软件，尤其是游戏领域，全是内购破解的。现在脱壳也还是很火，比较热门的就是脱一些短视频平台的壳，逆向出网络协议，然后写脚本刷关注、刷播放量。</p>
+<h2 id="如何脱壳"><a href="#如何脱壳" class="headerlink" title="如何脱壳"></a>如何脱壳</h2><p>宗旨是无论你如何加壳，代码总归是要运行的，总归是要明文出现在内存里面的，脱壳就是在适当的时机把内存里面的代码dump出来。Android领域脱壳方案有很多种，像Fart、Youpk、DexHunter等，具体可在看雪平台搜索相应脱壳方案与其原理，这里不做描述。笔者只尝试过原始的ida动态定位dex地址并dump内存方案、Fart方案和基于frida的方案，在当时确实能dump出源码，还是挺有趣的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我个人并不看好壳的未来，首先是对性能影响太大，其次是Android上的壳发展到现在已经很难破了例如VMP，再继续搞新壳难度太大也没必要，最后是现在的大势是一切上云，云手机是未来(手机算力不如服务器，现在美国还卡芯片，之后会专门讲一期云手机)，云手机就意味着大家之后的手机就是个显示屏+遥控器，app运行在服务器上做计算和渲染，到时候黑产根本就拿不到apk，跟别提脱壳了。</p>
+<p>不过就算壳没了，黑产也不会消失，攻防这场战争是无止尽的。</p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2020/09/30/Android-Dumpdex/" data-id="ckse2s0vv00003ij5e9h2ehxu"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%84%B1%E5%A3%B3/" rel="tag">脱壳</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-android-type3-error" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/09/29/android-type3-error/"
+    >Error type 3 Error Activity class {} does not exist</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/09/29/android-type3-error/" class="article-date">
+  <time datetime="2020-09-28T16:20:48.000Z" itemprop="datePublished">2020-09-29</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>Android Studio debug 安装 app 到手机上时，有时会安装失败，报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">09&#x2F;29 00:22:11: Launching app</span><br><span class="line">$ adb shell am start -n &quot;me.zkding.btdemo&#x2F;me.zkding.btdemo.activity.BluetoothChat&quot; -a android.intent.action.MAIN -c android.intent.category.LAUNCHER</span><br><span class="line">Error while executing: am start -n &quot;me.zkding.btdemo&#x2F;me.zkding.btdemo.activity.BluetoothChat&quot; -a android.intent.action.MAIN -c android.intent.category.LAUNCHER</span><br><span class="line">Starting: Intent &#123; act&#x3D;android.intent.action.MAIN cat&#x3D;[android.intent.category.LAUNCHER] cmp&#x3D;me.zkding.btdemo&#x2F;.activity.BluetoothChat &#125;</span><br><span class="line">Error type 3</span><br><span class="line">Error: Activity class &#123;me.zkding.btdemo&#x2F;me.zkding.btdemo.activity.BluetoothChat&#125; does not exist.</span><br><span class="line"></span><br><span class="line">Error while Launching activity</span><br></pre></td></tr></table></figure>
+
+<p>这个问题StackOverflow上就有人问过，也有人给出了<a href="https://stackoverflow.com/questions/20915266/error-type-3-error-activity-class-does-not-exist" target="_blank" rel="noopener">建议</a>, 但对我都不work。</p>
+<p>苦恼许久我才发现，原来是我之前debug时候装了一个apk在手机上，然后卸载的时候是手动卸载的(华为长按卸载)，然后再次安装同样的debug包就会报这个错。解决方法是 <code>adb uninstall me.zkding.btdemo</code> ，然后再安装就可以了。应该是手动卸载有什么东西没卸载干净，不过我暂时没时间细究，留个TODO。</p>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zkdingme.github.io/2020/09/29/android-type3-error/" data-id="ckse2s0wo00173ij53yl8ehr6"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Debug/" rel="tag">Debug</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-ssh-remote-tunnel" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -149,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/09/26/ssh-remote-tunnel/" data-id="ckrq2qv1i002ib6j5b72j3ki1"
+      <a data-url="https://zkdingme.github.io/2020/09/26/ssh-remote-tunnel/" data-id="ckse2s0x3002s3ij5h9xf0tng"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh-tunnel/" rel="tag">ssh tunnel</a></li></ul>
@@ -218,7 +435,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/09/26/batch%E4%B8%BA%E5%95%A5%E5%BF%AB/" data-id="ckrq2qv17001kb6j53938adcy"
+      <a data-url="https://zkdingme.github.io/2020/09/26/batch%E4%B8%BA%E5%95%A5%E5%BF%AB/" data-id="ckse2s0wq001e3ij59qok2he2"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%89%B9%E5%A4%84%E7%90%86/" rel="tag">批处理</a></li></ul>
@@ -302,7 +519,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/09/15/DeFi/" data-id="ckrq2qv0t000cb6j54syz1i6v"
+      <a data-url="https://zkdingme.github.io/2020/09/15/DeFi/" data-id="ckse2s0wc000f3ij5df83gapb"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeFi/" rel="tag">DeFi</a></li></ul>
@@ -513,7 +730,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/08/18/bloom-filter-kiss/" data-id="ckrq2qv1a001rb6j5gc5o3fig"
+      <a data-url="https://zkdingme.github.io/2020/08/18/bloom-filter-kiss/" data-id="ckse2s0wv001y3ij526ku9l99"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bloom-filter/" rel="tag">bloom filter</a></li></ul>
@@ -636,7 +853,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/08/03/ChinaJoy2020/" data-id="ckrq2qv0u000db6j50gkshgwg"
+      <a data-url="https://zkdingme.github.io/2020/08/03/ChinaJoy2020/" data-id="ckse2s0w600063ij5hm1f6ldo"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ChinaJoy2020/" rel="tag">ChinaJoy2020</a></li></ul>
@@ -985,7 +1202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/06/23/ADS-Notes/" data-id="ckrq2qv0y000qb6j5ft0rcbqm"
+      <a data-url="https://zkdingme.github.io/2020/06/23/ADS-Notes/" data-id="ckse2s0w500053ij51ivv3iwe"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ADS/" rel="tag">ADS</a></li></ul>
@@ -1069,455 +1286,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/05/19/docker%E8%BF%81%E7%A7%BB-var-lib-docker/" data-id="ckrq2qv1b001tb6j50t5f9c6e"
+      <a data-url="https://zkdingme.github.io/2020/05/19/docker%E8%BF%81%E7%A7%BB-var-lib-docker/" data-id="ckse2s0ws001l3ij54jkkdz67"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB-var-lib-docker/" rel="tag">迁移/var/lib/docker</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-微信小程序逆向" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/16/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%80%86%E5%90%91/"
-    >微信小程序逆向</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/16/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%80%86%E5%90%91/" class="article-date">
-  <time datetime="2020-05-16T05:20:23.000Z" itemprop="datePublished">2020-05-16</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%80%86%E5%90%91/">逆向</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>微信小程序基本是js写的，我们的目标就是逆向出其源码，再打包运行</p>
-<p>具体可分为三步(把大象装进冰箱)：</p>
-<ul>
-<li>获取小程序安装包</li>
-<li>逆向安装包得出源码</li>
-<li>编译运行</li>
-</ul>
-<h2 id="Dump-pkg"><a href="#Dump-pkg" class="headerlink" title="Dump pkg"></a>Dump pkg</h2><p>微信的安装包是.wxapkg文件，同一个小程序可能对应多个.wxapkg文件(一个主包，几个子包，如果需要遍历所有子包，就需要把小程序都点一遍)</p>
-<p>dump pkg有三种方式</p>
-<ul>
-<li>[手机微信] pkg文件在data/data/com.tencent.mm/MicroMsg/用户名ID<code>（ 类似于 2bc**************b65</code>)/appbrand/pkg下，找一部root设备(模拟器，刷机或者vmos)登陆微信pull出来即可</li>
-<li>[手机微信] <a href="https://jingyan.baidu.com/article/6d704a13529ab728da51ca4f.html" target="_blank" rel="noopener">备份数据</a></li>
-<li>[pc微信] 微信文件夹里面, <code>C:\Users\\Documents\WeChat Files\Applet\\\__APP__.wxapkg</code></li>
-</ul>
-<h2 id="Decompile"><a href="#Decompile" class="headerlink" title="Decompile"></a>Decompile</h2><p>使用已有<a href="https://github.com/dingzhenkai/wxappUnpacker" target="_blank" rel="noopener">脚本</a>或者<a href="https://github.com/dingzhenkai/wxappUnpacker-1" target="_blank" rel="noopener">支持分包的脚本</a>反编译得出源码(注意这个脚本只适用于手机微信dump出得wxapkg, pc微信dump出的包结构不一样)</p>
-<p>这一步需要node环境，可以用docker</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker pull node:12</span><br><span class="line">docker run -itd --name mynode node:12</span><br><span class="line">docker cp XXX.wxapkg [containerid]:[path]</span><br><span class="line">docker exec -it [containerid] bash</span><br><span class="line">node wuWxapkg.js [-d] &lt;path/to/.wxapkg&gt;</span><br><span class="line">docker cp [containerid]:[path] proj/</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Compile"><a href="#Compile" class="headerlink" title="Compile"></a>Compile</h2><p>使用微信开发者工具导入并编译</p>
-<h2 id="Refer"><a href="#Refer" class="headerlink" title="Refer"></a>Refer</h2><p><a href="https://github.com/gzh4213/wxappUnpacker/blob/master/README.md" target="_blank" rel="noopener">https://github.com/gzh4213/wxappUnpacker/blob/master/README.md</a></p>
-<p><a href="https://github.com/zhouyu1993/wxappUnpacker" target="_blank" rel="noopener">https://github.com/zhouyu1993/wxappUnpacker</a></p>
-<p><a href="http://lrdcq.com/me/read.php/66.htm" target="_blank" rel="noopener">http://lrdcq.com/me/read.php/66.htm</a></p>
-<p><a href="https://www.52pojie.cn/thread-1092806-1-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-1092806-1-1.html</a></p>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/05/16/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%80%86%E5%90%91/" data-id="ckrq2qv1p003cb6j54lv0etfj"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-配置bash与git代理翻墙" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/03/28/%E9%85%8D%E7%BD%AEbash%E4%B8%8Egit%E4%BB%A3%E7%90%86%E7%BF%BB%E5%A2%99/"
-    >配置bash与git代理</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/03/28/%E9%85%8D%E7%BD%AEbash%E4%B8%8Egit%E4%BB%A3%E7%90%86%E7%BF%BB%E5%A2%99/" class="article-date">
-  <time datetime="2020-03-27T16:36:27.000Z" itemprop="datePublished">2020-03-28</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BB%A3%E7%90%86/">代理</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="motivation"><a href="#motivation" class="headerlink" title="motivation"></a>motivation</h2><p>有时下载国外工具速度太慢或者就连接失败，所以有bash代理的需求，其中以git代理需求最为强烈。</p>
-<h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><p>参考<a href="https://blog.csdn.net/hanqingsong412/article/details/50464465" target="_blank" rel="noopener">https://blog.csdn.net/hanqingsong412/article/details/50464465</a></p>
-<p>速度由 20kb/s 到 1mb/s</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git config --global https.proxy http://1.2.3.4:5</span><br><span class="line">git config --global http.proxy http://1.2.3.4:5</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有git 设置</span></span><br><span class="line">git config --global -l</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">unset</span></span></span><br><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="bash"><a href="#bash" class="headerlink" title="bash"></a>bash</h2><p>还没遇到这个需求，遇到我再写</p>
-
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/03/28/%E9%85%8D%E7%BD%AEbash%E4%B8%8Egit%E4%BB%A3%E7%90%86%E7%BF%BB%E5%A2%99/" data-id="ckrq2qv1s003lb6j5692p7crq"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-elasticsearch公开课阮一鸣" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/03/22/elasticsearch%E5%85%AC%E5%BC%80%E8%AF%BE%E9%98%AE%E4%B8%80%E9%B8%A3/"
-    >elasticsearch公开课阮一鸣</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/03/22/elasticsearch%E5%85%AC%E5%BC%80%E8%AF%BE%E9%98%AE%E4%B8%80%E9%B8%A3/" class="article-date">
-  <time datetime="2020-03-22T07:49:53.000Z" itemprop="datePublished">2020-03-22</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/elasticsearch/">elasticsearch</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p>教程入口：<a href="https://developer.aliyun.com/live/2154" target="_blank" rel="noopener">https://developer.aliyun.com/live/2154</a></p>
-<p>教程相关材料 <a href="https://github.com/onebirdrocks/geektime-ELK/" target="_blank" rel="noopener">https://github.com/onebirdrocks/geektime-ELK/</a></p>
-<p>aliyun es控制台 <a href="https://elasticsearch-cn-shanghai.console.aliyun.com/#/home" target="_blank" rel="noopener">https://elasticsearch-cn-shanghai.console.aliyun.com/#/home</a></p>
-<p>Docker elf build <a href="https://github.com/deviantony/docker-elk" target="_blank" rel="noopener">https://github.com/deviantony/docker-elk</a></p>
-<h2 id="01-Elasticsearch课程介绍"><a href="#01-Elasticsearch课程介绍" class="headerlink" title="01 | Elasticsearch课程介绍"></a>01 | Elasticsearch课程介绍</h2><p>Elasticsearch结合Kibana、Logstash、Beats可以实现搜索和实时分析</p>
-<p>Elasticsearch工程师认证考试</p>
-<h2 id="02-内容综述及学习建议"><a href="#02-内容综述及学习建议" class="headerlink" title="02 | 内容综述及学习建议"></a>02 | 内容综述及学习建议</h2><p>学习目标：</p>
-<ul>
-<li><p>开发<br>产品基本功能，底层工作原理，数据建模最佳实践</p>
-</li>
-<li><p>运维<br>容量规划；性能优化；问题诊断；滚动升级</p>
-</li>
-<li><p>方案<br>搜索与如何解决搜索的相关性问题<br>大数据分析实践与项目实战，理论知识运用到实际场景</p>
-</li>
-</ul>
-<h2 id="03-Elasticsearch简介及其发展历史"><a href="#03-Elasticsearch简介及其发展历史" class="headerlink" title="03 | Elasticsearch简介及其发展历史"></a>03 | Elasticsearch简介及其发展历史</h2><p><a href="https://www.elastic.co/cn/elasticsearch" target="_blank" rel="noopener">https://www.elastic.co/cn/elasticsearch</a></p>
-<p>Elasticsearch 开源近实时分布式搜索分析引擎</p>
-<p><img src="arch.png" alt=""></p>
-<p><img src="feature.png" alt=""></p>
-<p><img src="func.png" alt=""></p>
-<p><img src="5feature.png" alt=""></p>
-<p><img src="6feature.png" alt=""></p>
-<p><img src="7feature.png" alt=""></p>
-<h2 id="04-Elastic-Stack家族成员及其应用场景"><a href="#04-Elastic-Stack家族成员及其应用场景" class="headerlink" title="04 | Elastic Stack家族成员及其应用场景"></a>04 | Elastic Stack家族成员及其应用场景</h2><p><img src="ESS.png" alt=""></p>
-<p><img src="logstash.png" alt=""></p>
-<p><img src="logstash_fea.png" alt=""></p>
-<p><img src="kibana.png" alt=""></p>
-<p><img src="beats.png" alt=""></p>
-<p><img src="elk_for.png" alt=""></p>
-<h2 id="05-Elasticsearch的安装与简单配置"><a href="#05-Elasticsearch的安装与简单配置" class="headerlink" title="05 | Elasticsearch的安装与简单配置"></a>05 | Elasticsearch的安装与简单配置</h2><p>手把手教会你如何在阿里云购买与配置es和如何在本地安装es，es插件，如何多节点运行</p>
-<h2 id="06-Kibanan的安装与界面快速浏览"><a href="#06-Kibanan的安装与界面快速浏览" class="headerlink" title="06 | Kibanan的安装与界面快速浏览"></a>06 | Kibanan的安装与界面快速浏览</h2><p><a href="https://www.elastic.co/cn/kibana" target="_blank" rel="noopener">https://www.elastic.co/cn/kibana</a></p>
-<blockquote>
-<p>通过 Kibana，您可以对自己的 Elasticsearch 进行可视化，还可以在 Elastic Stack 中进行导航，这样您便可以进行各种操作了，从跟踪查询负载，到理解请求如何流经您的整个应用，都能轻松完成。</p>
-</blockquote>
-<p>在本机下载与安装kibana 与使用</p>
-<p>重点是dev tool 可以调用esapi</p>
-<p>例如查看所有index <code>GET _cat/indices?v</code></p>
-<h2 id="07-在Docker容器中运行Elasticsearch-Kibana和-Cerebro"><a href="#07-在Docker容器中运行Elasticsearch-Kibana和-Cerebro" class="headerlink" title="07 | 在Docker容器中运行Elasticsearch Kibana和 Cerebro"></a>07 | 在Docker容器中运行Elasticsearch Kibana和 Cerebro</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2.2'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">cerebro:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">lmenezes/cerebro:0.8.3</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">cerebro</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9000:9000"</span></span><br><span class="line">    <span class="attr">command:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">-Dhosts.0.host=http://elasticsearch:9200</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es7net</span></span><br><span class="line">  <span class="attr">kibana:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/kibana/kibana:7.1.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kibana7</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">I18N_LOCALE=zh-CN</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">XPACK_GRAPH_ENABLED=true</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TIMELION_ENABLED=true</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">XPACK_MONITORING_COLLECTION_ENABLED="true"</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"5601:5601"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es7net</span></span><br><span class="line">  <span class="attr">elasticsearch:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/elasticsearch/elasticsearch:7.1.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">es7_01</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">cluster.name=geektime</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">node.name=es7_01</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">bootstrap.memory_lock=true</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"ES_JAVA_OPTS=-Xms512m -Xmx512m"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">discovery.seed_hosts=es7_01,es7_02</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">cluster.initial_master_nodes=es7_01,es7_02</span></span><br><span class="line">    <span class="attr">ulimits:</span></span><br><span class="line">      <span class="attr">memlock:</span></span><br><span class="line">        <span class="attr">soft:</span> <span class="number">-1</span></span><br><span class="line">        <span class="attr">hard:</span> <span class="number">-1</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es7data1:/usr/share/elasticsearch/data</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9200</span><span class="string">:9200</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es7net</span></span><br><span class="line">  <span class="attr">elasticsearch2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/elasticsearch/elasticsearch:7.1.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">es7_02</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">cluster.name=geektime</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">node.name=es7_02</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">bootstrap.memory_lock=true</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"ES_JAVA_OPTS=-Xms512m -Xmx512m"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">discovery.seed_hosts=es7_01,es7_02</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">cluster.initial_master_nodes=es7_01,es7_02</span></span><br><span class="line">    <span class="attr">ulimits:</span></span><br><span class="line">      <span class="attr">memlock:</span></span><br><span class="line">        <span class="attr">soft:</span> <span class="number">-1</span></span><br><span class="line">        <span class="attr">hard:</span> <span class="number">-1</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es7data2:/usr/share/elasticsearch/data</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es7net</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">es7data1:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">local</span></span><br><span class="line">  <span class="attr">es7data2:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">local</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">es7net:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>docker-compose up</code> 即可运行</p>
-<p><code>docker-compose down</code>停止运行</p>
-<h2 id="08-Logstash安装与导入数据"><a href="#08-Logstash安装与导入数据" class="headerlink" title="08 | Logstash安装与导入数据"></a>08 | Logstash安装与导入数据</h2><blockquote>
-<p>Logstash 是一个实时的管道式开源日志收集引擎。Logstash可以动态的将不同来源的数据进行归一并且将格式化的数据存储到你选择的位置。对你的所有做数据清洗和大众化处理，以便做数据分析和可视化。</p>
-<p>我们对Logstash的日志收集做了大量的创新，但它的能力远不止收集日志这么简单。通过输入、过滤和输出插件Logstash可以对任何类型的事件丰富和转换，通过本地编码器还可以进一步简化此过程。Logstash通过大量的多样化数据来提升你的洞察力。</p>
-</blockquote>
-<p><a href="https://www.elastic.co/cn/logstash" target="_blank" rel="noopener">https://www.elastic.co/cn/logstash</a></p>
-<p><a href="https://www.kancloud.cn/aiyinsi-tan/logstash/870166" target="_blank" rel="noopener">logstash6.5中文文档</a></p>
-<p>重点是 logstash.conf 文件，将原始数据处理一遍之后插入es，处理逻辑也实现在conf文件中</p>
-<h2 id="09-基本概念：索引、文档和REST-API"><a href="#09-基本概念：索引、文档和REST-API" class="headerlink" title="09 | 基本概念：索引、文档和REST API"></a>09 | 基本概念：索引、文档和REST API</h2><p><img src="9-1.png" alt=""></p>
-<p><img src="9-2.png" alt=""></p>
-<p><img src="9-3.png" alt=""></p>
-<p><img src="9-4.png" alt=""></p>
-<p><img src="9-5.png" alt=""></p>
-<p><img src="9-6.png" alt=""></p>
-<p><img src="9-7.png" alt=""></p>
-<p><img src="9-8.png" alt=""></p>
-<p>Index 相关 API</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#查看所有index</span><br><span class="line">GET _cat&#x2F;indices?v</span><br><span class="line"></span><br><span class="line">#查看index的mappping</span><br><span class="line">GET movies&#x2F;_mapping?pretty&#x3D;true</span><br><span class="line"></span><br><span class="line">#查看所有的mapping</span><br><span class="line">GET _mapping?pretty&#x3D;true</span><br><span class="line"></span><br><span class="line">#查看索引相关信息</span><br><span class="line">GET kibana_sample_data_ecommerce</span><br><span class="line"></span><br><span class="line">#查看索引的文档总数</span><br><span class="line">GET kibana_sample_data_ecommerce&#x2F;_count</span><br><span class="line"></span><br><span class="line">#查看前10条文档，了解文档格式</span><br><span class="line">POST kibana_sample_data_ecommerce&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#_cat indices API</span><br><span class="line">#查看indices</span><br><span class="line">GET &#x2F;_cat&#x2F;indices&#x2F;kibana*?v&amp;s&#x3D;index</span><br><span class="line"></span><br><span class="line">#查看状态为绿的索引</span><br><span class="line">GET &#x2F;_cat&#x2F;indices?v&amp;health&#x3D;green</span><br><span class="line"></span><br><span class="line">#按照文档个数排序</span><br><span class="line">GET &#x2F;_cat&#x2F;indices?v&amp;s&#x3D;docs.count:desc</span><br><span class="line"></span><br><span class="line">#查看具体的字段</span><br><span class="line">GET &#x2F;_cat&#x2F;indices&#x2F;kibana*?pri&amp;v&amp;h&#x3D;health,index,pri,rep,docs.count,mt</span><br><span class="line"></span><br><span class="line">#How much memory is used per index?</span><br><span class="line">GET &#x2F;_cat&#x2F;indices?v&amp;h&#x3D;i,tm&amp;s&#x3D;tm:desc</span><br></pre></td></tr></table></figure>
-
-<p>本节课讲解了es中几个基本概念：index(索引) type(类型) mapping(映射) document(文档)</p>
-<p>这几个概念在es7的时候发生了重大改变：type没有了，或者说type只能是_doc</p>
-<p>es7之前，对比关系型数据库的话:</p>
-<table>
-<thead>
-<tr>
-<th>mysql</th>
-<th>es</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>db</td>
-<td>index</td>
-</tr>
-<tr>
-<td>table</td>
-<td>type</td>
-</tr>
-<tr>
-<td>schema</td>
-<td>mapping</td>
-</tr>
-<tr>
-<td>row</td>
-<td>document</td>
-</tr>
-</tbody></table>
-<p>es7之后</p>
-<table>
-<thead>
-<tr>
-<th>mysql</th>
-<th>es</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>table</td>
-<td>index</td>
-</tr>
-<tr>
-<td>schema</td>
-<td>mapping</td>
-</tr>
-<tr>
-<td>row</td>
-<td>document</td>
-</tr>
-</tbody></table>
-<p><strong>为什么不再支持单个Index下，多个Tyeps</strong></p>
-<p><a href="https://www.elastic.co/cn/blog/moving-from-types-to-typeless-apis-in-elasticsearch-7-0" target="_blank" rel="noopener">官网是这么解释的</a></p>
-<h2 id="10-基本概念：节点、集群、分片及副本"><a href="#10-基本概念：节点、集群、分片及副本" class="headerlink" title="10 | 基本概念：节点、集群、分片及副本"></a>10 | 基本概念：节点、集群、分片及副本</h2><p><img src="10-1.png" alt=""></p>
-<p><img src="10-2.png" alt=""></p>
-<p><img src="10-3.png" alt=""></p>
-<p><img src="10-4.png" alt=""></p>
-<p><img src="10-5.png" alt=""></p>
-<p><img src="10-6.png" alt=""></p>
-<p><img src="10-7.png" alt=""></p>
-<p><img src="10-8.png" alt=""></p>
-<p><img src="10-9.png" alt=""></p>
-<p><img src="10-10.png" alt=""></p>
-<p><img src="10-11.png" alt=""></p>
-<p><img src="10-12.png" alt=""></p>
-<p><img src="10-13.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">get _cat&#x2F;nodes?v</span><br><span class="line">GET &#x2F;_nodes&#x2F;es7_01,es7_02</span><br><span class="line">GET &#x2F;_cat&#x2F;nodes?v</span><br><span class="line">GET &#x2F;_cat&#x2F;nodes?v&amp;h&#x3D;id,ip,port,v,m</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GET _cluster&#x2F;health</span><br><span class="line">GET _cluster&#x2F;health?level&#x3D;shards</span><br><span class="line">GET &#x2F;_cluster&#x2F;health&#x2F;kibana_sample_data_ecommerce,kibana_sample_data_flights</span><br><span class="line">GET &#x2F;_cluster&#x2F;health&#x2F;kibana_sample_data_flights?level&#x3D;shards</span><br><span class="line"></span><br><span class="line">#### cluster state</span><br><span class="line">The cluster state API allows access to metadata representing the state of the whole cluster. This includes information such as</span><br><span class="line">GET &#x2F;_cluster&#x2F;state</span><br><span class="line"></span><br><span class="line">#cluster get settings</span><br><span class="line">GET &#x2F;_cluster&#x2F;settings</span><br><span class="line">GET &#x2F;_cluster&#x2F;settings?include_defaults&#x3D;true</span><br><span class="line"></span><br><span class="line">GET _cat&#x2F;shards</span><br><span class="line">GET _cat&#x2F;shards?h&#x3D;index,shard,prirep,state,unassigned.reason</span><br></pre></td></tr></table></figure>
-
-<h2 id="11-文档的基本CRUD与批量操作"><a href="#11-文档的基本CRUD与批量操作" class="headerlink" title="11 | 文档的基本CRUD与批量操作"></a>11 | 文档的基本CRUD与批量操作</h2><p><img src="11-1.png" alt=""></p>
-<p><img src="11-2.png" alt=""></p>
-<p><img src="11-3.png" alt=""></p>
-<p><img src="11-4.png" alt=""></p>
-<p><img src="11-5.png" alt=""></p>
-<p><img src="11-6.png" alt=""></p>
-<p><img src="11-7.png" alt=""></p>
-<p><img src="11-8.png" alt=""></p>
-<p><img src="11-9.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line">############Create Document############</span><br><span class="line">#create document. 自动生成 _id</span><br><span class="line">POST users&#x2F;_doc</span><br><span class="line">&#123;</span><br><span class="line">	&quot;user&quot; : &quot;Mike&quot;,</span><br><span class="line">    &quot;post_date&quot; : &quot;2019-04-15T14:12:12&quot;,</span><br><span class="line">    &quot;message&quot; : &quot;trying out Kibana&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#create document. 指定Id。如果id已经存在，报错</span><br><span class="line">PUT users&#x2F;_doc&#x2F;1?op_type&#x3D;create</span><br><span class="line">&#123;</span><br><span class="line">    &quot;user&quot; : &quot;Jack&quot;,</span><br><span class="line">    &quot;post_date&quot; : &quot;2019-05-15T14:12:12&quot;,</span><br><span class="line">    &quot;message&quot; : &quot;trying out Elasticsearch&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#create document. 指定 ID 如果已经存在，就报错</span><br><span class="line">PUT users&#x2F;_create&#x2F;1</span><br><span class="line">&#123;</span><br><span class="line">     &quot;user&quot; : &quot;Jack&quot;,</span><br><span class="line">    &quot;post_date&quot; : &quot;2019-05-15T14:12:12&quot;,</span><br><span class="line">    &quot;message&quot; : &quot;trying out Elasticsearch&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">### Get Document by ID</span><br><span class="line">#Get the document by ID</span><br><span class="line">GET users&#x2F;_doc&#x2F;1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###  Index &amp; Update</span><br><span class="line">#Update 指定 ID  (先删除，在写入)</span><br><span class="line">GET users&#x2F;_doc&#x2F;1</span><br><span class="line"></span><br><span class="line">PUT users&#x2F;_doc&#x2F;1</span><br><span class="line">&#123;</span><br><span class="line">	&quot;user&quot; : &quot;Mike&quot;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#GET users&#x2F;_doc&#x2F;1</span><br><span class="line">#在原文档上增加字段</span><br><span class="line">POST users&#x2F;_update&#x2F;1&#x2F;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;doc&quot;:&#123;</span><br><span class="line">        &quot;post_date&quot; : &quot;2019-05-15T14:12:12&quot;,</span><br><span class="line">        &quot;message&quot; : &quot;trying out Elasticsearch&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Delete by Id</span><br><span class="line"># 删除文档</span><br><span class="line">DELETE users&#x2F;_doc&#x2F;1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Bulk 操作</span><br><span class="line">#执行两次，查看每次的结果</span><br><span class="line"></span><br><span class="line">#执行第1次</span><br><span class="line">POST _bulk</span><br><span class="line">&#123; &quot;index&quot; : &#123; &quot;_index&quot; : &quot;test&quot;, &quot;_id&quot; : &quot;1&quot; &#125; &#125;</span><br><span class="line">&#123; &quot;field1&quot; : &quot;value1&quot; &#125;</span><br><span class="line">&#123; &quot;delete&quot; : &#123; &quot;_index&quot; : &quot;test&quot;, &quot;_id&quot; : &quot;2&quot; &#125; &#125;</span><br><span class="line">&#123; &quot;create&quot; : &#123; &quot;_index&quot; : &quot;test2&quot;, &quot;_id&quot; : &quot;3&quot; &#125; &#125;</span><br><span class="line">&#123; &quot;field1&quot; : &quot;value3&quot; &#125;</span><br><span class="line">&#123; &quot;update&quot; : &#123;&quot;_id&quot; : &quot;1&quot;, &quot;_index&quot; : &quot;test&quot;&#125; &#125;</span><br><span class="line">&#123; &quot;doc&quot; : &#123;&quot;field2&quot; : &quot;value2&quot;&#125; &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#执行第2次</span><br><span class="line">POST _bulk</span><br><span class="line">&#123; &quot;index&quot; : &#123; &quot;_index&quot; : &quot;test&quot;, &quot;_id&quot; : &quot;1&quot; &#125; &#125;</span><br><span class="line">&#123; &quot;field1&quot; : &quot;value1&quot; &#125;</span><br><span class="line">&#123; &quot;delete&quot; : &#123; &quot;_index&quot; : &quot;test&quot;, &quot;_id&quot; : &quot;2&quot; &#125; &#125;</span><br><span class="line">&#123; &quot;create&quot; : &#123; &quot;_index&quot; : &quot;test2&quot;, &quot;_id&quot; : &quot;3&quot; &#125; &#125;</span><br><span class="line">&#123; &quot;field1&quot; : &quot;value3&quot; &#125;</span><br><span class="line">&#123; &quot;update&quot; : &#123;&quot;_id&quot; : &quot;1&quot;, &quot;_index&quot; : &quot;test&quot;&#125; &#125;</span><br><span class="line">&#123; &quot;doc&quot; : &#123;&quot;field2&quot; : &quot;value2&quot;&#125; &#125;</span><br><span class="line"></span><br><span class="line">### mget 操作</span><br><span class="line">GET &#x2F;_mget</span><br><span class="line">&#123;</span><br><span class="line">    &quot;docs&quot; : [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;_index&quot; : &quot;test&quot;,</span><br><span class="line">            &quot;_id&quot; : &quot;1&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;_index&quot; : &quot;test&quot;,</span><br><span class="line">            &quot;_id&quot; : &quot;2&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#URI中指定index</span><br><span class="line">GET &#x2F;test&#x2F;_mget</span><br><span class="line">&#123;</span><br><span class="line">    &quot;docs&quot; : [</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            &quot;_id&quot; : &quot;1&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            &quot;_id&quot; : &quot;2&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GET &#x2F;_mget</span><br><span class="line">&#123;</span><br><span class="line">    &quot;docs&quot; : [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;_index&quot; : &quot;test&quot;,</span><br><span class="line">            &quot;_id&quot; : &quot;1&quot;,</span><br><span class="line">            &quot;_source&quot; : false</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;_index&quot; : &quot;test&quot;,</span><br><span class="line">            &quot;_id&quot; : &quot;2&quot;,</span><br><span class="line">            &quot;_source&quot; : [&quot;field3&quot;, &quot;field4&quot;]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;_index&quot; : &quot;test&quot;,</span><br><span class="line">            &quot;_id&quot; : &quot;3&quot;,</span><br><span class="line">            &quot;_source&quot; : &#123;</span><br><span class="line">                &quot;include&quot;: [&quot;user&quot;],</span><br><span class="line">                &quot;exclude&quot;: [&quot;user.location&quot;]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">### msearch 操作</span><br><span class="line">POST kibana_sample_data_ecommerce&#x2F;_msearch</span><br><span class="line">&#123;&#125;</span><br><span class="line">&#123;&quot;query&quot; : &#123;&quot;match_all&quot; : &#123;&#125;&#125;,&quot;size&quot;:1&#125;</span><br><span class="line">&#123;&quot;index&quot; : &quot;kibana_sample_data_flights&quot;&#125;</span><br><span class="line">&#123;&quot;query&quot; : &#123;&quot;match_all&quot; : &#123;&#125;&#125;,&quot;size&quot;:2&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 清除测试数据</span><br><span class="line">#清除数据</span><br><span class="line">DELETE users</span><br><span class="line">DELETE test</span><br><span class="line">DELETE test2</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="12-倒排索引介绍"><a href="#12-倒排索引介绍" class="headerlink" title="12 | 倒排索引介绍"></a>12 | 倒排索引介绍</h2><p><img src="12-1.png" alt=""></p>
-<p><img src="12-2.png" alt=""></p>
-<p><img src="12-3.png" alt=""></p>
-<p><img src="12-4.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">POST _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;standard&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;Mastering Elasticsearch&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">POST _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;standard&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;Elasticsearch Server&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">POST _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;standard&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;Elasticsearch Essentials&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>相关阅读</p>
-<ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95</a></li>
-<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html" target="_blank" rel="noopener">https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html</a></li>
-</ul>
-<h2 id="13-通过Analyzer进行分词"><a href="#13-通过Analyzer进行分词" class="headerlink" title="13 | 通过Analyzer进行分词"></a>13 | 通过Analyzer进行分词</h2><p><img src="13-1.png" alt=""></p>
-<p><img src="13-2.png" alt=""></p>
-<p><img src="13-3.png" alt=""></p>
-<p><img src="13-4.png" alt=""></p>
-<p><img src="13-5.png" alt=""></p>
-<p><img src="13-6.png" alt=""></p>
-<p><img src="13-7.png" alt=""></p>
-<p><img src="13-8.png" alt=""></p>
-<p><img src="13-9.png" alt=""></p>
-<p><img src="13-10.png" alt=""></p>
-<p><img src="13-11.png" alt=""></p>
-<p><img src="13-12.png" alt=""></p>
-<p><img src="13-13.png" alt=""></p>
-<p><img src="13-14.png" alt=""></p>
-<p><img src="13-15.png" alt=""></p>
-<p><img src="13-16.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">#Simple Analyzer – 按照非字母切分（符号被过滤），小写处理</span><br><span class="line">#Stop Analyzer – 小写处理，停用词过滤（the，a，is）</span><br><span class="line">#Whitespace Analyzer – 按照空格切分，不转小写</span><br><span class="line">#Keyword Analyzer – 不分词，直接将输入当作输出</span><br><span class="line">#Patter Analyzer – 正则表达式，默认 \W+ (非字符分隔)</span><br><span class="line">#Language – 提供了30多种常见语言的分词器</span><br><span class="line">#2 running Quick brown-foxes leap over lazy dogs in the summer evening</span><br><span class="line"></span><br><span class="line">#查看不同的analyzer的效果</span><br><span class="line">#standard</span><br><span class="line">GET _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;standard&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;2 running Quick brown-foxes leap over lazy dogs in the summer evening.&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#simpe</span><br><span class="line">GET _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;simple&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;2 running Quick brown-foxes leap over lazy dogs in the summer evening.&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GET _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;stop&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;2 running Quick brown-foxes leap over lazy dogs in the summer evening.&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#stop</span><br><span class="line">GET _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;whitespace&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;2 running Quick brown-foxes leap over lazy dogs in the summer evening.&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#keyword</span><br><span class="line">GET _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;keyword&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;2 running Quick brown-foxes leap over lazy dogs in the summer evening.&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GET _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;pattern&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;2 running Quick brown-foxes leap over lazy dogs in the summer evening.&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#english</span><br><span class="line">GET _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;english&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;2 running Quick brown-foxes leap over lazy dogs in the summer evening.&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">POST _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;icu_analyzer&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;他说的确实在理”&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">POST _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;standard&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;他说的确实在理”&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">POST _analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;analyzer&quot;: &quot;icu_analyzer&quot;,</span><br><span class="line">  &quot;text&quot;: &quot;这个苹果不大好吃&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>相关阅读</p>
-<ul>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.1/indices-analyze.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/7.1/indices-analyze.html</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analyzer-anatomy.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/current/analyzer-anatomy.html</a></li>
-</ul>
-<h2 id="14-Search-API概览"><a href="#14-Search-API概览" class="headerlink" title="14 | Search API概览"></a>14 | Search API概览</h2><p><img src="14-1.png" alt=""><br><img src="14-2.png" alt=""><br><img src="14-3.png" alt=""><br><img src="14-4.png" alt=""><br><img src="14-5.png" alt=""><br><img src="14-6.png" alt=""><br><img src="14-7.png" alt=""><br><img src="14-8.png" alt=""><br><img src="14-9.png" alt=""><br><img src="14-10.png" alt=""></p>
-<p>需要通过Kibana导入Sample Data的电商数据。<br>具体参考“2.2节-Kibana的安装与界面快速浏览”一节教程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#URI Query</span><br><span class="line">GET kibana_sample_data_ecommerce&#x2F;_search?q&#x3D;customer_first_name:Eddie</span><br><span class="line">GET kibana*&#x2F;_search?q&#x3D;customer_first_name:Eddie</span><br><span class="line">GET &#x2F;_all&#x2F;_search?q&#x3D;customer_first_name:Eddie</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#REQUEST Body</span><br><span class="line">POST kibana_sample_data_ecommerce&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;: true,</span><br><span class="line">	&quot;query&quot;: &#123;</span><br><span class="line">		&quot;match_all&quot;: &#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>相关阅读</p>
-<ul>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.1/search-search.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/7.1/search-search.html</a></li>
-<li><a href="https://searchenginewatch.com/sew/news/2065080/search-engines-101" target="_blank" rel="noopener">https://searchenginewatch.com/sew/news/2065080/search-engines-101</a></li>
-<li><a href="https://www.huffpost.com/entry/search-engines-101-part-i_b_1104525" target="_blank" rel="noopener">https://www.huffpost.com/entry/search-engines-101-part-i_b_1104525</a></li>
-<li><a href="https://www.entrepreneur.com/article/176398" target="_blank" rel="noopener">https://www.entrepreneur.com/article/176398</a></li>
-<li><a href="https://www.searchtechnologies.com/meaning-of-relevancy" target="_blank" rel="noopener">https://www.searchtechnologies.com/meaning-of-relevancy</a></li>
-<li><a href="https://baike.baidu.com/item/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%8F%91%E5%B1%95%E5%8F%B2/2422574" target="_blank" rel="noopener">https://baike.baidu.com/item/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%8F%91%E5%B1%95%E5%8F%B2/2422574</a></li>
-</ul>
-<h2 id="15-URI-Search详解"><a href="#15-URI-Search详解" class="headerlink" title="15 | URI Search详解"></a>15 | URI Search详解</h2><p><img src="15-1.png" alt=""><br><img src="15-2.png" alt=""><br><img src="15-3.png" alt=""><br><img src="15-4.png" alt=""><br><img src="15-5.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">#基本查询</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;2012&amp;df&#x3D;title&amp;sort&#x3D;year:desc&amp;from&#x3D;0&amp;size&#x3D;10&amp;timeout&#x3D;1s</span><br><span class="line"></span><br><span class="line">#带profile</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;2012&amp;df&#x3D;title</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#泛查询，正对_all,所有字段</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;2012</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#指定字段</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:2012&amp;sort&#x3D;year:desc&amp;from&#x3D;0&amp;size&#x3D;10&amp;timeout&#x3D;1s</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查找美丽心灵, Mind为泛查询</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:Beautiful Mind</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 泛查询</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:2012</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#使用引号，Phrase查询</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:&quot;Beautiful Mind&quot;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#分组，Bool查询</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:(Beautiful Mind)</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#布尔操作符</span><br><span class="line"># 查找美丽心灵</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:(Beautiful AND Mind)</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 查找美丽心灵</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:(Beautiful NOT Mind)</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 查找美丽心灵</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:(Beautiful %2BMind)</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#范围查询 ,区间写法</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:beautiful AND year:[2002 TO 2018%7D</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#通配符查询</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:b*</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;模糊匹配&amp;近似度匹配</span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:beautifl~1</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GET &#x2F;movies&#x2F;_search?q&#x3D;title:&quot;Lord Rings&quot;~2</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:&quot;true&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>相关阅读</p>
-<ul>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.0/search-uri-request.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/7.0/search-uri-request.html</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.0/search-search.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/7.0/search-search.html</a></li>
-</ul>
-<h2 id="16-Request-Body与Query-DSL简介"><a href="#16-Request-Body与Query-DSL简介" class="headerlink" title="16 | Request Body与Query DSL简介"></a>16 | Request Body与Query DSL简介</h2><p><img src="16-1.png" alt=""><br><img src="16-2.png" alt=""><br><img src="16-3.png" alt=""><br><img src="16-4.png" alt=""><br><img src="16-5.png" alt=""><br><img src="16-6.png" alt=""><br><img src="16-7.png" alt=""></p>
-<ul>
-<li>需要通过 Kibana 导入Sample Data的电商数据。具体参考“2.2节-Kibana的安装与界面快速浏览”</li>
-<li>需导入Movie测试数据，具体参考“2.4-Logstash安装与导入数据”</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">#ignore_unavailable&#x3D;true，可以忽略尝试访问不存在的索引“404_idx”导致的报错</span><br><span class="line">#查询movies分页</span><br><span class="line">POST &#x2F;movies,404_idx&#x2F;_search?ignore_unavailable&#x3D;true</span><br><span class="line">&#123;</span><br><span class="line">  &quot;profile&quot;: true,</span><br><span class="line">	&quot;query&quot;: &#123;</span><br><span class="line">		&quot;match_all&quot;: &#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">POST &#x2F;kibana_sample_data_ecommerce&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;from&quot;:10,</span><br><span class="line">  &quot;size&quot;:20,</span><br><span class="line">  &quot;query&quot;:&#123;</span><br><span class="line">    &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#对日期排序</span><br><span class="line">POST kibana_sample_data_ecommerce&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;sort&quot;:[&#123;&quot;order_date&quot;:&quot;desc&quot;&#125;],</span><br><span class="line">  &quot;query&quot;:&#123;</span><br><span class="line">    &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#source filtering</span><br><span class="line">POST kibana_sample_data_ecommerce&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;_source&quot;:[&quot;order_date&quot;],</span><br><span class="line">  &quot;query&quot;:&#123;</span><br><span class="line">    &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#脚本字段</span><br><span class="line">GET kibana_sample_data_ecommerce&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;script_fields&quot;: &#123;</span><br><span class="line">    &quot;new_field&quot;: &#123;</span><br><span class="line">      &quot;script&quot;: &#123;</span><br><span class="line">        &quot;lang&quot;: &quot;painless&quot;,</span><br><span class="line">        &quot;source&quot;: &quot;doc[&#39;order_date&#39;].value+&#39;hello&#39;&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">POST movies&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;title&quot;: &quot;last christmas&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">POST movies&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;title&quot;: &#123;</span><br><span class="line">        &quot;query&quot;: &quot;last christmas&quot;,</span><br><span class="line">        &quot;operator&quot;: &quot;and&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">POST movies&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_phrase&quot;: &#123;</span><br><span class="line">      &quot;title&quot;:&#123;</span><br><span class="line">        &quot;query&quot;: &quot;one love&quot;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">POST movies&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_phrase&quot;: &#123;</span><br><span class="line">      &quot;title&quot;:&#123;</span><br><span class="line">        &quot;query&quot;: &quot;one love&quot;,</span><br><span class="line">        &quot;slop&quot;: 1</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>相关阅读</p>
-<ul>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.0/search-uri-request.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/7.0/search-uri-request.html</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.0/search-search.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/7.0/search-search.html</a></li>
-</ul>
-<h2 id="17-Query-String-amp-Simple-Query-String查询"><a href="#17-Query-String-amp-Simple-Query-String查询" class="headerlink" title="17 | Query String&amp;Simple Query String查询"></a>17 | Query String&amp;Simple Query String查询</h2><p><img src="17-1.png" alt=""><br><img src="17-2.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">PUT &#x2F;users&#x2F;_doc&#x2F;1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;Ruan Yiming&quot;,</span><br><span class="line">  &quot;about&quot;:&quot;java, golang, node, swift, elasticsearch&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PUT &#x2F;users&#x2F;_doc&#x2F;2</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;:&quot;Li Yiming&quot;,</span><br><span class="line">  &quot;about&quot;:&quot;Hadoop&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">POST users&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;query_string&quot;: &#123;</span><br><span class="line">      &quot;default_field&quot;: &quot;name&quot;,</span><br><span class="line">      &quot;query&quot;: &quot;Ruan AND Yiming&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">POST users&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;query_string&quot;: &#123;</span><br><span class="line">      &quot;fields&quot;:[&quot;name&quot;,&quot;about&quot;],</span><br><span class="line">      &quot;query&quot;: &quot;(Ruan AND Yiming) OR (Java AND Elasticsearch)&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#Simple Query 默认的operator是 Or</span><br><span class="line">POST users&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;simple_query_string&quot;: &#123;</span><br><span class="line">      &quot;query&quot;: &quot;Ruan AND Yiming&quot;,</span><br><span class="line">      &quot;fields&quot;: [&quot;name&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">POST users&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;simple_query_string&quot;: &#123;</span><br><span class="line">      &quot;query&quot;: &quot;Ruan Yiming&quot;,</span><br><span class="line">      &quot;fields&quot;: [&quot;name&quot;],</span><br><span class="line">      &quot;default_operator&quot;: &quot;AND&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GET &#x2F;movies&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;: true,</span><br><span class="line">	&quot;query&quot;:&#123;</span><br><span class="line">		&quot;query_string&quot;:&#123;</span><br><span class="line">			&quot;default_field&quot;: &quot;title&quot;,</span><br><span class="line">			&quot;query&quot;: &quot;Beafiful AND Mind&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 多fields</span><br><span class="line">GET &#x2F;movies&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;: true,</span><br><span class="line">	&quot;query&quot;:&#123;</span><br><span class="line">		&quot;query_string&quot;:&#123;</span><br><span class="line">			&quot;fields&quot;:[</span><br><span class="line">				&quot;title&quot;,</span><br><span class="line">				&quot;year&quot;</span><br><span class="line">			],</span><br><span class="line">			&quot;query&quot;: &quot;2012&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GET &#x2F;movies&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">	&quot;profile&quot;:true,</span><br><span class="line">	&quot;query&quot;:&#123;</span><br><span class="line">		&quot;simple_query_string&quot;:&#123;</span><br><span class="line">			&quot;query&quot;:&quot;Beautiful +mind&quot;,</span><br><span class="line">			&quot;fields&quot;:[&quot;title&quot;]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="18-Dynamic-Mapping和常见字段类型"><a href="#18-Dynamic-Mapping和常见字段类型" class="headerlink" title="18 | Dynamic Mapping和常见字段类型"></a>18 | Dynamic Mapping和常见字段类型</h2><h2 id="20-多字段特性及Mapping中配置自定义Analyzer"><a href="#20-多字段特性及Mapping中配置自定义Analyzer" class="headerlink" title="20 | 多字段特性及Mapping中配置自定义Analyzer"></a>20 | 多字段特性及Mapping中配置自定义Analyzer</h2>
-      
-      <!-- 打赏 -->
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zkdingme.github.io/2020/03/22/elasticsearch%E5%85%AC%E5%BC%80%E8%AF%BE%E9%98%AE%E4%B8%80%E9%B8%A3/" data-id="ckrq2qv1d0024b6j57fued3se"
-        class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elasticsearch/" rel="tag">elasticsearch</a></li></ul>
 
     </footer>
 
